@@ -7,7 +7,7 @@
         </div>
         <div class="form-group">
             <label for="email">Reporter Email</label>
-            <input type="email" class="form-control" id="email" name="reporter_email" placeholder="Leave blank if no mails">
+            <input type="email" class="form-control" id="email" name="reporter_email" placeholder="Leave blank if there is no email">
         </div>
         <div class="form-group">
             <label for="phone">Phone</label>
