@@ -21,21 +21,6 @@ class Request extends CI_Controller {
             'newline' => "\r\n",
             'smtp_crypto' => 'tls'
         );
-
-        // $config = array(
-            
-        //     'protocol' => 'smtp',
-        //     'smtp_host' => 'smtp-relay.sendinblue.com',
-        //     'smtp_port' => 587,
-        //     'smtp_user' => '5410b1003@smtp-brevo.com',
-        //     'smtp_pass' => '5FgBKbVDsk0Z4zxH',
-        //     'mailtype' => 'html',
-        //     'charset' => 'utf-8',
-        //     'newline' => "\r\n",
-        //     'smtp_crypto' => 'tls',
-        //     'validation' => TRUE
-        // );
-
         $this->email->initialize($config);
     }
 
@@ -122,7 +107,7 @@ class Request extends CI_Controller {
     private function sendEmail($to, $category, $data, $file_name) {
         $category_email = array(
             'Network' => 'raharja.permana@centreparkcorp.com',
-            // 'Parkee System' => 'rofiq.rifiansyah@centreparkcorp.com',
+            'Parkee System' => 'rofiq.rifiansyah@centreparkcorp.com',
             'IOT System' => ['tejo.wurianto@centreparkcorp.com', 'deny.ruswandy@centreparkcorp.com','topik.gunawan@centreparkcorp.com'],
             'Infra' => 'm.fahmi@centreparkcorp.com',
             'IT Support' => ['harry.djohardin@centreparkcorp.com', 'moh.hamam@centreparkcorp.com'],
@@ -172,6 +157,7 @@ class Request extends CI_Controller {
 
     // view detail complaint
     public function detail($id) {
+        $this->load->model('M_Request');
         // if (!$this->session->userdata('logged_in')) {
         //     redirect('login');
         // }
@@ -181,7 +167,7 @@ class Request extends CI_Controller {
         }
     
         $data = [
-            'title' => 'Request Details',
+            'title' => 'Detail Request',
             'request' => $request
         ];
         $this->load->view('request/detail', $data);
@@ -209,6 +195,7 @@ class Request extends CI_Controller {
         }
         
         redirect('request/detail/' . $id);
+        
     }
 
     public function insertLogUpdate($data) {
@@ -217,13 +204,13 @@ class Request extends CI_Controller {
     }
     
     // send email update status
-    private function sendStatusUpdateEmail($complaint) {
+    private function sendStatusUpdateEmail($request) {
         $this->email->from('cs.ho@centreparkcorp.com', 'Helpdesk Admin');
-        $this->email->to($complaint['reporter_email']);
-        $this->email->subject("Update on Your Complaint: " . $complaint['issue_title']);
+        $this->email->to($request['reporter_email']);
+        $this->email->subject("Update on Your request: " . $request['issue_title']);
         
-        $message = "<p>Dear {$complaint['reporter_name']},</p>";
-        $message .= "<p>Your complaint with the title '{$complaint['issue_title']}' has been updated to status: <strong>{$complaint['status']}</strong>.</p>";
+        $message = "<p>Dear {$request['reporter_name']},</p>";
+        $message .= "<p>Your request with the title '{$request['issue_title']}' has been updated to status: <strong>{$request['status']}</strong>.</p>";
         $message .= "<p>Thank you for your patience.</p>";
         $message .= "<p>Best regards,<br>Helpdesk Centrepark</p>";
     
@@ -235,18 +222,18 @@ class Request extends CI_Controller {
     }
     
     //update category and send email to correct tim
-    public function redirectComplaint($id) {
+    public function redirectRequest($id) {
         $newCategory = $this->input->post('new_category');
         if ($this->M_Request->updateCategory($id, $newCategory)) {
-            $complaint = $this->M_Request->getComplaintById($id);
+            $request = $this->M_Request->getRequestById($id);
             
-            $this->sendEmail($complaint['reporter_email'], $newCategory, $complaint);
+            $this->sendEmail($request['reporter_email'], $newCategory, $request);
             
-            $this->session->set_flashdata('success', 'Complaint successfully redirected to the correct team.');
+            $this->session->set_flashdata('success', 'request successfully redirected to the correct team.');
         } else {
-            $this->session->set_flashdata('error', 'Failed to redirect complaint.');
+            $this->session->set_flashdata('error', 'Failed to redirect request.');
         }
         
-        redirect('complaint/detail/' . $id);
+        redirect('request/detail/' . $id);
     }    
 }

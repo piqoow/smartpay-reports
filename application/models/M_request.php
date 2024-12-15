@@ -16,8 +16,7 @@ class M_request extends CI_Model {
     }
 
     public function getRequestById($id) {
-        $this->db->where('id', $id);
-        $query = $this->db->get('tb_request');
+        $query = $this->db->get_where('tb_request', ['id_ticket' => $id]);
         
         if ($query->num_rows() > 0) {
             return $query->row_array();

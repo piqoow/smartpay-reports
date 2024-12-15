@@ -87,7 +87,7 @@
                                     <th>Category</th>
                                     <th>Deadline</th>
                                     <th>Description</th>
-                                    <th>Created at</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,7 +110,12 @@
                                     <td><?= $row['category']; ?></td>
                                     <td><?= $row['deadline_date']; ?></td>
                                     <td><?= $row['issue_description']; ?></td>
-                                    <td><?= $row['created_at']; ?></td>
+                                    <td>
+                                        <!-- Edit Button -->
+                                        <a href="<?= base_url('complaint/detail/' . $row['id']); ?>" class="btn btn-sm btn-warning edit-btn">
+                                            <i class="fas fa-edit"></i> Execution Details
+                                        </a>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

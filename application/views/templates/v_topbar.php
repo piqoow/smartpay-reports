@@ -208,13 +208,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p><strong>New Update - Released on December 12, 2024</strong></p>
+                <p><strong>New Update - Released on December 13, 2024</strong></p>
                 <p>This update includes several important improvements and bug fixes to enhance the performance and stability of the application:</p>
                 <ul>
                     <li><strong>New Features:</strong></li>
                     <ul>
-                        <li>Added a new table view request in dashboard menu.</li>
-                        <li>Added a new location input form to ticket creation menu and request menu.</li>
+                        <li>Added a new table view complaint in dashboard menu only for executor (execution button).</li>
+                        <!-- <li>Added a new location input form to ticket creation menu and request menu.</li> -->
                         <!-- <li>Added a new menu <strong><a href="<?= base_url('request'); ?>">Request</a></strong>.</li> -->
                     </ul>
                     <li><strong>Bug Fixes:</strong></li>
