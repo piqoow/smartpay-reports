@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '110.0.100.70',
-	'username' => 'root',
-	'password' => 'P@ssw0rdKu!23',
-	'database' => 'helpdesk_system',
+	'hostname' => '110.0.100.135',
+	'username' => 'rnd',
+	'password' => 'rahasia123',
+	'database' => 'wiki_smartpay',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

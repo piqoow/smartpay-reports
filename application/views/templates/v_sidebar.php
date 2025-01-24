@@ -6,9 +6,9 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-question-circle"></i>
+                    <i class="fas fa-task"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Helpdesk</div>
+                <div class="sidebar-brand-text mx-3">Smartpay Team</div>
             </a>
 
             <!-- Divider -->
@@ -21,6 +21,16 @@
 
             <!-- Nav Item - Dashboard -->
             <?php if($this->session->userdata('user_teams') == 'Helpdesk' || $this->session->userdata('user_teams') == 'Dev'): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('dashboard'); ?>">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('assigment'); ?>">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>My Task</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard'); ?>">
                     <i class="fas fa-fw fa-home"></i>
