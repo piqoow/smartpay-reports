@@ -85,21 +85,23 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Title</th>
-                                    <th>Name</th>
-                                    <th>E-Mail</th>
-                                    <th>Phone</th>
-                                    <th>Category</th>
+                                    <th>No</th>
                                     <th>Location Name</th>
-                                    <th>Deadline</th>
-                                    <th>Description</th>
-                                    <!-- <th>Created at</th> -->
+                                    <th>OS Server</th>
+                                    <th>IP Address : Port</th>
+                                    <th>IOT Category</th>
+                                    <th>DB User</th>
+                                    <th>DB Password</th>
+                                    <th>DB Name</th>
+                                    <th>SSH User</th>
+                                    <th>SSH Password</th>
+                                    <th>Anydesk ID</th>
+                                    <th>Anydesk Password</th>
+                                    <th>Created at</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <!-- <?php 
                                 $no = 1;
                                 foreach ($dashboard_data as $row): 
                                     date_default_timezone_set('Asia/Jakarta');
@@ -113,7 +115,7 @@
                                     if($is_overdue) {
                                         $row_style = 'animation: blink 2s linear infinite;';
                                     }
-                                ?>
+                                ?> -->
                                 <tr style="<?= $row_style ?>">
                                 <style>
                                     @keyframes blink {
@@ -122,17 +124,19 @@
                                         100% { background-color: #ffcdd2; }
                                     }
                                 </style>
-                                    <!-- <td><?= $no++; ?></td> -->
-                                    <td><?= $row->id_ticket; ?></td>
-                                    <td><?= $row->issue_date; ?></td>
-                                    <td><?= $row->issue_title; ?></td>
-                                    <td><?= $row->reporter_name; ?></td>
-                                    <td><?= $row->reporter_email; ?></td>
-                                    <td><?= $row->reporter_phone; ?></td>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $row->location_name; ?></td>
                                     <td><?= $row->category; ?></td>
-                                    <td><?= $row->location; ?></td>
-                                    <td><?= $row->deadline_date; ?></td>
-                                    <td><?= $row->issue_description; ?></td>
+                                    <td><?= $row->ip_address; ?> : <?= $row->port; ?></td>
+                                    <td><?= $row->iot_category; ?></td>
+                                    <td><?= $row->database_username; ?></td>
+                                    <td><?= $row->database_password; ?></td>
+                                    <td><?= $row->database_name; ?></td>
+                                    <td><?= $row->ssh_username; ?></td>
+                                    <td><?= $row->ssh_password; ?></td>
+                                    <td><?= $row->anydesk_id; ?></td>
+                                    <td><?= $row->anydesk_password; ?></td>
+                                    <td><?= $row->created_at; ?></td>
                                     <!-- <td><?= $row->created_at; ?></td> -->
                                 </tr>
                                 <?php endforeach; ?>

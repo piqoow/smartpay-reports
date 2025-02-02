@@ -65,6 +65,13 @@ $route['complaint/detail/(:num)'] = 'complaint/detail/$1';
 $route['request/detail/(:num)'] = 'request/detail/$1';
 $route['complaint/redirectComplaint/(:num)'] = 'complaint/redirectComplaint/$1';
 
+//ADD ITEM
+$route['iot'] = 'iot/index';
+// $route['iot'] = 'iot/index';
+// $route['iot'] = 'iot/index';
+// $route['iot'] = 'iot/index';
+
+
 //auth
 $route['login'] = 'auth/index';
 $route['logout'] = 'auth/logout';

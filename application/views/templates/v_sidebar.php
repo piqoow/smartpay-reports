@@ -54,16 +54,22 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('complaint'); ?>">
+                <a class="nav-link" href="<?= base_url('iot'); ?>">
                     <i class="fas fa-fw fa-comment"></i>
-                    <span>Complaint</span>
+                    <span>IOT</span>
                 </a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('request'); ?>">
-                        <i class="fas fa-fw fa-file-alt"></i>
-                        <span>Request</span>
-                    </a>
+                <a class="nav-link" href="<?= base_url('request'); ?>">
+                    <i class="fas fa-fw fa-file-alt"></i>
+                    <span>Request</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('user'); ?>">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>IOT</span>
+                </a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->

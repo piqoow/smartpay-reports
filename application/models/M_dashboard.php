@@ -3,11 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_dashboard extends CI_Model {
 
+    public function __construct() {
+        parent::__construct();
+        $this->locations = $this->load->database('locations', TRUE);
+    }
+
     public function get_dashboard_data() {
         $this->db->select('*');
-        $this->db->from('tb_complaint');
-        $this->db->where('status !=', 'resolved');
-        $this->db->or_where('status IS NULL');
+        $this->db->from('iot_system');
         $this->db->order_by('created_at', 'ASC'); 
         $query = $this->db->get();
         return $query->result();
