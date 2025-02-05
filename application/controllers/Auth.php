@@ -11,7 +11,7 @@ class Auth extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata('logged_in')) {
-            redirect('complaint');
+            redirect('iot');
         }
         $this->load->view('auth/v_login');
     }
