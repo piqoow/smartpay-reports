@@ -11,7 +11,7 @@ class Auth extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata('logged_in')) {
-            redirect('iot');
+            redirect('daily-task');
         }
         $this->load->view('auth/v_login');
     }
@@ -31,7 +31,7 @@ class Auth extends CI_Controller {
                 'logged_in' => TRUE
             ];
             $this->session->set_userdata($user_data);
-            redirect('iot');
+            redirect('daily-task');
         } else {
             $this->session->set_flashdata('error', 'Invalid username or password');
             redirect('auth');

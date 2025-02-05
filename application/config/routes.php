@@ -70,7 +70,7 @@ $route['daily-task'] = 'task/indexDaily';
 $route['dashboard-task'] = 'task/indexDashboard';
 
 //IOT
-$route['iot'] = 'iot/index';
+$route['iot-server'] = 'iot/indexServer';
 $route['iot-pgs'] = 'iot/indexPGS';
 $route['iot-dds'] = 'iot/indexDDS';
 $route['iot-tds'] = 'iot/indexTDS';

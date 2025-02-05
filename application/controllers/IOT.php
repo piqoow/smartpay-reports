@@ -13,7 +13,7 @@ class IOT extends CI_Controller {
     
     //======================================= SERVER IOT =======================================// 
 
-    public function index() {
+    public function indexServer() {
         // Fetch locations from model
         $data['dashboard'] = $this->M_iot->get_dashboard_data(); 
         $data['locations'] = $this->M_iot->get_locations(); 

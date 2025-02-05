@@ -73,7 +73,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('iot'); ?>">
+                <a class="nav-link" href="<?= base_url('iot-server'); ?>">
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>IOT Server</span>
                 </a>
