@@ -5,10 +5,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-task"></i>
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-fw fa-home"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Smartpay Team</div>
+                <div class="sidebar-brand-text mx-3">Smartpay Reports</div>
             </a>
 
             <!-- Divider -->
@@ -20,8 +20,8 @@
             </div> -->
 
             <!-- Nav Item - Dashboard -->
-            <?php if($this->session->userdata('user_teams') == 'Helpdesk' || $this->session->userdata('user_teams') == 'Dev'): ?>
-            <li class="nav-item">
+            <!-- <?php if($this->session->userdata('user_teams') == 'Helpdesk' || $this->session->userdata('user_teams') == 'Dev'): ?> -->
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard'); ?>">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Dashboard</span></a>
@@ -35,42 +35,99 @@
                 <a class="nav-link" href="<?= base_url('dashboard'); ?>">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Dashboard</span></a>
-            </li>
-            <?php else: ?>
+            </li> -->
+            <!-- <?php else: ?> -->
+
             <!-- Assigment Dashboard -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('assigment'); ?>">
                     <i class="fas fa-fw fa-home"></i>
                     <span>My Assigment</span></a>
-            </li>
-            <?php endif; ?>
+            </li> -->
+            <!-- <?php endif; ?> -->
 
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('dashboard'); ?>">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li> -->
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reporting
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('daily-task'); ?>">
+                    <i class="fas fa-fw fa-sign"></i>
+                    <span>Daily Task</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Manage Assets
             </div>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('iot'); ?>">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>IOT</span>
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>IOT Server</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('request'); ?>">
-                    <i class="fas fa-fw fa-file-alt"></i>
-                    <span>Request</span>
+            
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManage"
+                    aria-expanded="true" aria-controls="collapseManage">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>IOT Manage</span>
                 </a>
-            </li>
+                <div id="collapseManage" class="collapse" aria-labelledby="headingManage"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">IOT Data :</h6>
+                        <a class="collapse-item" href="<?= base_url('iot-pgs'); ?>">PGS<br>(Parking Guidance System)</a>
+                        <a class="collapse-item" href="<?= base_url('iot-dds'); ?>">DDS<br>(Dynamic Display Signage)</a>
+                        <a class="collapse-item" href="<?= base_url('iot-tds'); ?>">TDS<br>(Traffic Dispatch System)</a>
+                        <a class="collapse-item" href="<?= base_url('iot-eb'); ?>">EB<br>(Emergency Button)</a>
+                    </div>
+                </div>
+            </li> -->
+            
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
+                    aria-expanded="true" aria-controls="collapseReport">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>IOT Report</span>
+                </a>
+                <div id="collapseReport" class="collapse" aria-labelledby="headingReport"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">IOT Data Report :</h6>
+                        <a class="collapse-item" href="<?= base_url('iot'); ?>">PGS<br>(Parking Guidance System)</a>
+                        <a class="collapse-item" href="<?= base_url('iot'); ?>">DDS<br>(Dynamic Display Signage)</a>
+                        <a class="collapse-item" href="<?= base_url('iot'); ?>">TDS<br>(Traffic Dispatch System)</a>
+                        <a class="collapse-item" href="<?= base_url('iot'); ?>">EB<br>(Emergency Button)</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <hr class="sidebar-divider">
+            <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
+            <div class="sidebar-heading">
+                Dev Center
+            </div>
+            
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('user'); ?>">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>IOT</span>
+                    <span>User Manage</span>
                 </a>
             </li>
+            <?php endif; ?>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <!-- <li class="nav-item">

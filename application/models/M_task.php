@@ -1,16 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_iot extends CI_Model {
+class M_task extends CI_Model {
 
     public function __construct() {
         parent::__construct();
         $this->locations = $this->load->database('locations', TRUE);
     }
 
-    public function get_dashboard_data() {
+    public function get_daily_task() {
         $this->db->select('*');
         $this->db->from('iot_system');
+        $this->db->order_by('created_at', 'ASC'); 
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_dashboard_task() {
+        $this->db->select('*');
+        $this->db->from('smartpay_task');
         $this->db->order_by('created_at', 'ASC'); 
         $query = $this->db->get();
         return $query->result();
@@ -23,7 +31,7 @@ class M_iot extends CI_Model {
     }
 
     public function saveData($data) {
-        $this->db->insert('iot_system', $data);
+        $this->db->insert('smartpay_task', $data);
         return $this->db->insert_id();
     }
 

@@ -65,8 +65,16 @@ $route['complaint/detail/(:num)'] = 'complaint/detail/$1';
 $route['request/detail/(:num)'] = 'request/detail/$1';
 $route['complaint/redirectComplaint/(:num)'] = 'complaint/redirectComplaint/$1';
 
-//ADD ITEM
+//TASK
+$route['daily-task'] = 'task/indexDaily';
+$route['dashboard-task'] = 'task/indexDashboard';
+
+//IOT
 $route['iot'] = 'iot/index';
+$route['iot-pgs'] = 'iot/indexPGS';
+$route['iot-dds'] = 'iot/indexDDS';
+$route['iot-tds'] = 'iot/indexTDS';
+$route['iot-eb'] = 'iot/indexEB';
 // $route['iot'] = 'iot/index';
 // $route['iot'] = 'iot/index';
 // $route['iot'] = 'iot/index';

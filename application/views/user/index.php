@@ -85,27 +85,28 @@
                     </div>
                     <div class="form-group">
                         <label>E-mail</label>
-                        <input type="text" class="form-control" name="user_email" required>
+                        <input type="text" class="form-control" name="user_email">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" required>
+                        <input type="text" class="form-control" name="password" required>
                     </div>
                     <div class="form-group">
                         <label>Level</label>
                         <select class="form-control" name="user_level" required>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Staff">Staff</option>
+                            <option value="User">User</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Teams</label>
                         <select class="form-control" name="user_teams" required>
-                            <option value="Helpdesk">Helpdesk</option>
-                            <option value="Network">Network</option>
-                            <option value="RnD_Development">RnD/Development</option>
+                            <option value="SoftwareDev">SoftwareDev</option>
+                            <option value="Administration">Administration</option>
+                            <option value="ResearchAndDevelopment">Research And Development</option>
                             <option value="IT_Support">IT Support</option>
-                            <option value="Infra">Infra</option>
+                            <option value="Cashless">Cashless</option>
                         </select>
                     </div>
                 </div>
@@ -155,8 +156,9 @@
                     <div class="form-group">
                         <label for="edit_level">Level</label>
                         <select class="form-control" name="user_level" id="edit_level" required>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Staff">Staff</option>
+                            <option value="User">User</option>
                         </select>
                     </div>
 

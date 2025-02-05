@@ -31,7 +31,7 @@ class Auth extends CI_Controller {
                 'logged_in' => TRUE
             ];
             $this->session->set_userdata($user_data);
-            redirect('dashboard');
+            redirect('iot');
         } else {
             $this->session->set_flashdata('error', 'Invalid username or password');
             redirect('auth');

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_iot extends CI_Model {
+class M_report extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -17,7 +17,6 @@ class M_iot extends CI_Model {
     }
 
     public function get_locations() {
-        $this->locations->order_by('nama_Lokasi', 'ASC');
         $query = $this->locations->get('ms_lokasi');
         return $query->result();
     }
@@ -31,12 +30,4 @@ class M_iot extends CI_Model {
         $query = $this->db->get('iot_system');
         return $query->result();
     }
-
-    public function deleteData($id) {
-        // Hapus data dari tabel berdasarkan ID
-        $this->db->where('id_iot', $id);
-        return $this->db->delete('iot_system'); // Gantilah 'iot_table' dengan nama tabel Anda
-    }
-
-    //======================================= PGS =======================================// 
 }
