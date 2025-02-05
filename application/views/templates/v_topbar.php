@@ -179,10 +179,10 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a> -->
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#activityLogModal">
+                                <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#activityLogModal">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Log Update Version
-                                </a>
+                                </a> -->
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -213,7 +213,7 @@
                 <ul>
                     <li><strong>New Features:</strong></li>
                     <ul>
-                        <li>Added a new table view complaint in dashboard menu only for executor (execution button).</li>
+                        <!-- <li>Added a new table view complaint in dashboard menu only for executor (execution button).</li> -->
                         <!-- <li>Added a new location input form to ticket creation menu and request menu.</li> -->
                         <!-- <li>Added a new menu <strong><a href="<?= base_url('request'); ?>">Request</a></strong>.</li> -->
                     </ul>
