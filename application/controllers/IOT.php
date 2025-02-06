@@ -14,7 +14,6 @@ class IOT extends CI_Controller {
     //======================================= SERVER IOT =======================================// 
 
     public function indexServer() {
-        // Fetch locations from model
         $data['dashboard'] = $this->M_iot->get_dashboard_data(); 
         $data['locations'] = $this->M_iot->get_locations(); 
         $data['title'] = 'IOT Form';
@@ -50,17 +49,12 @@ class IOT extends CI_Controller {
     }
 
     public function delete() {
-        // Ambil ID dari input POST
         $id = $this->input->post('id');
         
-        // Pastikan ID valid
         if ($id) {
-            // Panggil fungsi deleteData pada model untuk menghapus data berdasarkan ID
             if ($this->M_iot->deleteData($id)) {
-                // Beri feedback sukses jika berhasil dihapus
                 $this->session->set_flashdata('success', 'IOT data has been successfully deleted');
             } else {
-                // Jika gagal, beri feedback error
                 $this->session->set_flashdata('error', 'Failed to delete IOT data');
             }
         }
@@ -68,65 +62,6 @@ class IOT extends CI_Controller {
         // Redirect kembali ke halaman IOT
         redirect('iot');
     }
-    
-    //======================================= PGS =======================================// 
-
-    public function indexPGS() {
-        // Fetch locations from model
-        $data['dashboard'] = $this->M_iot->get_dashboard_data(); 
-        $data['locations'] = $this->M_iot->get_locations(); 
-        $data['title'] = 'IOT PGS Form';
-        $data['content'] = 'iot/index-pgs';
-        $this->load->view('templates/main', $data);
-    }
-
-    public function addPGS() {
-        date_default_timezone_set('Asia/Jakarta');
-        
-        $data = array(
-            'location_name' => $this->input->post('location_name'),
-            'os_server' => $this->input->post('os_server'),
-            'ip_address' => $this->input->post('ip_address'),
-            'port' => $this->input->post('port'),
-            'iot_category' => $this->input->post('iot_category'),
-            'database_username' => $this->input->post('database_username'),
-            'database_password' => $this->input->post('database_password'),
-            'database_name' => $this->input->post('database_name'),
-            'ssh_username' => $this->input->post('ssh_username'),
-            'ssh_password' => $this->input->post('ssh_password'),
-            'anydesk_id' => $this->input->post('anydesk_id'),
-            'anydesk_password' => $this->input->post('anydesk_password'),            
-            'implementation_date' => $this->input->post('implementation_date'),            
-        );
-
-        if ($this->M_iot->saveData($data)) {
-            $this->session->set_flashdata('success', 'The complaint was successfully sent');
-        } else {
-            $this->session->set_flashdata('error', 'Complaint failed to send');
-        }
-        redirect('iot');
-    }
-
-    public function deletePGS() {
-        // Ambil ID dari input POST
-        $id = $this->input->post('id');
-        
-        // Pastikan ID valid
-        if ($id) {
-            // Panggil fungsi deleteData pada model untuk menghapus data berdasarkan ID
-            if ($this->M_iot->deleteData($id)) {
-                // Beri feedback sukses jika berhasil dihapus
-                $this->session->set_flashdata('success', 'IOT data has been successfully deleted');
-            } else {
-                // Jika gagal, beri feedback error
-                $this->session->set_flashdata('error', 'Failed to delete IOT data');
-            }
-        }
-        
-        // Redirect kembali ke halaman IOT
-        redirect('iot');
-    }
-
     //======================================= DDS =======================================// 
     
     //======================================= TDS =======================================// 
