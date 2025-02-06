@@ -10,7 +10,7 @@ class M_task extends CI_Model {
 
     public function get_daily_task() {
         $this->db->select('*');
-        $this->db->from('iot_system');
+        $this->db->from('smartpay_task');
         $this->db->order_by('created_at', 'ASC'); 
         $query = $this->db->get();
         return $query->result();
@@ -41,9 +41,8 @@ class M_task extends CI_Model {
     }
 
     public function deleteData($id) {
-        // Hapus data dari tabel berdasarkan ID
         $this->db->where('id_iot', $id);
-        return $this->db->delete('iot_system'); // Gantilah 'iot_table' dengan nama tabel Anda
+        return $this->db->delete('iot_system');
     }
 
     //======================================= PGS =======================================// 

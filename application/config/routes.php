@@ -56,14 +56,14 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'auth';
 
 // complaint
-$route['complaint'] = 'complaint/index';
-$route['request'] = 'request/index';
-$route['dashboard'] = 'dashboard/index';
-$route['user'] = 'user/index';
-$route['assigment'] = 'assigment/index';
-$route['complaint/detail/(:num)'] = 'complaint/detail/$1';
-$route['request/detail/(:num)'] = 'request/detail/$1';
-$route['complaint/redirectComplaint/(:num)'] = 'complaint/redirectComplaint/$1';
+// $route['complaint'] = 'complaint/index';
+// $route['request'] = 'request/index';
+// $route['dashboard'] = 'dashboard/index';
+// $route['user'] = 'user/index';
+// $route['assigment'] = 'assigment/index';
+// $route['complaint/detail/(:num)'] = 'complaint/detail/$1';
+// $route['request/detail/(:num)'] = 'request/detail/$1';
+// $route['complaint/redirectComplaint/(:num)'] = 'complaint/redirectComplaint/$1';
 
 //TASK
 $route['daily-task'] = 'task/indexDaily';

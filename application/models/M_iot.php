@@ -33,9 +33,8 @@ class M_iot extends CI_Model {
     }
 
     public function deleteData($id) {
-        // Hapus data dari tabel berdasarkan ID
         $this->db->where('id_iot', $id);
-        return $this->db->delete('iot_system'); // Gantilah 'iot_table' dengan nama tabel Anda
+        return $this->db->delete('iot_system');
     }
 
     //======================================= PGS =======================================// 
