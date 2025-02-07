@@ -8,13 +8,18 @@ class M_task extends CI_Model {
         $this->locations = $this->load->database('locations', TRUE);
     }
 
+    //======================================= Daily Task Teams =======================================// 
+
     public function get_daily_task() {
+        $user_teams = $this->session->userdata('user_teams');
         $this->db->select('*');
         $this->db->from('smartpay_task');
         $this->db->order_by('created_at', 'ASC'); 
         $query = $this->db->get();
         return $query->result();
     }
+
+    //======================================= Dashboard All Task =======================================// 
 
     public function get_dashboard_task() {
         $this->db->select('*');

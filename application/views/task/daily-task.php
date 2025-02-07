@@ -1,9 +1,3 @@
-<style>
-    #troubleshooting-fields .form-group {
-    margin-bottom: 1px; /* Spasi antar input */
-}
-</style>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -59,20 +53,35 @@
                                 <td><?= $row->status_task; ?></td>
                                 <td>
                                     <!-- Edit Button -->
-                                    <!-- <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editIOTModal" 
+                                    <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editIOTModal" 
                                             data-id="<?= $row->id_task; ?>"
                                             data-name-task="<?= $row->name_task; ?>"
+                                            data-owner-task="<?= $row->owner_task; ?>"
+                                            data-user-teams="<?= $row->user_teams; ?>"
+                                            data-location-name="<?= $row->location_name; ?>"
                                             data-category-task="<?= $row->category_task; ?>"
+                                            data-system-category="<?= $row->system_category; ?>"
                                             data-priority-task="<?= $row->priority_task; ?>"
                                             data-status-task="<?= $row->status_task; ?>"
-                                            data-last-update="<?= $row->created_at; ?>">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </button> -->
+                                            data-startdate-task="<?= $row->startdate_task; ?>"
+                                            data-enddate-task="<?= $row->enddate_task; ?>"
+                                            data-reason-task="<?= $row->reason_task; ?>"
+                                            data-constraint-task="<?= $row->constraint_task; ?>"
+                                            data-report-task="<?= $row->report_task; ?>"
+                                            data-outstanding-task="<?= $row->outstanding_task; ?>"
+                                            data-file-name="<?= $row->file_name; ?>"
+                                            data-last-update="<?= $row->created_at; ?>"
+                                            >
+                                        <i class="fas fa-file"></i> Detail
+                                    </button>
+                                    
+                                    <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
                                     <!-- Delete Button -->
                                     <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteIOTModal" 
-                                            data-id="<?= $row->id_task; ?>" disabled>
+                                            data-id="<?= $row->id_task; ?>">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -97,6 +106,14 @@
             </div>
             <form action="<?= base_url('task/addDaily'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nama Pekerja</label>
+                                <input type="text" class="form-control" name="username" required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -230,31 +247,36 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Location Name</label>
-                                <input type="text" class="form-control" name="location_name" id="edit_location_name" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>OS Server</label>
-                                <select class="form-control" name="os_server" id="edit_os_server" required>
-                                    <option value="Ubuntu">Linux Ubuntu</option>
-                                    <option value="Windows">Windows</option>
-                                </select>
+                                <label>Nama Pekerja</label>
+                                <input type="text" class="form-control" name="owner_task" id="edit_owner_task" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>IP Address</label>
-                                <input type="text" class="form-control" name="ip_address" id="edit_ip_address" required>
+                                <label>Job Name</label>
+                                <input type="text" class="form-control" name="name_task" id="edit_name_task" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kategori Task</label>
+                                <input type="text" class="form-control" name="category_task" id="edit_category_task" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kategori Sistem</label>
+                                <input type="text" class="form-control" name="system_category" id="edit_system_category" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Port</label>
-                                <input type="text" class="form-control" name="port" id="edit_port" required>
+                                <input type="text" class="form-control" name="port" id="edit_port" disabled>
                             </div>
                         </div>
                     </div>
@@ -262,13 +284,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>IOT Category</label>
-                                <input type="text" class="form-control" name="iot_category" id="edit_iot_category" required>
+                                <input type="text" class="form-control" name="iot_category" id="edit_iot_category" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>DB User</label>
-                                <input type="text" class="form-control" name="database_username" id="edit_db_user" required>
+                                <input type="text" class="form-control" name="database_username" id="edit_db_user" disabled>
                             </div>
                         </div>
                     </div>
@@ -276,13 +298,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>DB Password</label>
-                                <input type="text" class="form-control" name="database_password" id="edit_db_password" required>
+                                <input type="text" class="form-control" name="database_password" id="edit_db_password" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>DB Name</label>
-                                <input type="text" class="form-control" name="database_name" id="edit_db_name" required>
+                                <input type="text" class="form-control" name="database_name" id="edit_db_name" disabled>
                             </div>
                         </div>
                     </div>
@@ -290,13 +312,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>SSH User</label>
-                                <input type="text" class="form-control" name="ssh_username" id="edit_ssh_user" required>
+                                <input type="text" class="form-control" name="ssh_username" id="edit_ssh_user" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>SSH Password</label>
-                                <input type="text" class="form-control" name="ssh_password" id="edit_ssh_password" required>
+                                <input type="text" class="form-control" name="ssh_password" id="edit_ssh_password" disabled>
                             </div>
                         </div>
                     </div>
@@ -304,13 +326,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Anydesk ID</label>
-                                <input type="text" class="form-control" name="anydesk_id" id="edit_anydesk_id" required>
+                                <input type="text" class="form-control" name="anydesk_id" id="edit_anydesk_id" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Anydesk Password</label>
-                                <input type="text" class="form-control" name="anydesk_password" id="edit_anydesk_password" required>
+                                <input type="text" class="form-control" name="anydesk_password" id="edit_anydesk_password" disabled>
                             </div>
                         </div>
                     </div>
@@ -318,7 +340,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Implementation Date</label>
-                                <input type="date" class="form-control" name="implementation_date" id="edit_implementation_date" required>
+                                <input type="date" class="form-control" name="implementation_date" id="edit_implementation_date" disabled>
                             </div>
                         </div>
                     </div>
@@ -349,8 +371,8 @@
                     <input type="hidden" name="id" id="delete_id">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
                 </div>
             </form>
         </div>
@@ -389,33 +411,44 @@
 
 <!-- JavaScript for Modal Actions -->
 <script>
-    // Edit Button Handler
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function () {
             console.log('Button clicked!');
             console.log('ID:', this.getAttribute('data-id'));
+            console.log('Name Task:', this.getAttribute('data-name-task'));
             console.log('Location Name:', this.getAttribute('data-location-name'));
-            console.log('OS Server:', this.getAttribute('data-os-server'));
-            console.log('IP Address:', this.getAttribute('data-ip-address'));
-            console.log('Port:', this.getAttribute('data-port'));
+            console.log('Owner Task:', this.getAttribute('data-owner-task'));
+            console.log('User Teams:', this.getAttribute('data-user-teams'));
+            console.log('Category Task:', this.getAttribute('data-category-task'));
+            console.log('System Category:', this.getAttribute('data-system-category'));
+            console.log('Priority Task:', this.getAttribute('data-priority-task'));
+            console.log('Status Task:', this.getAttribute('data-status-task'));
+            console.log('Start Date Task:', this.getAttribute('data-startdate-task'));
+            console.log('End Date Task:', this.getAttribute('data-enddate-task'));
+            console.log('Reason Task:', this.getAttribute('data-reason-task'));
+            console.log('Constraint Task:', this.getAttribute('data-constraint-task'));
+            console.log('Report Task:', this.getAttribute('data-report-task'));
+            console.log('Outstanding Task:', this.getAttribute('data-outstanding-task'));
+            console.log('File Name:', this.getAttribute('data-file-name'));
+            console.log('Last Update:', this.getAttribute('data-last-update'));
             
             document.getElementById('edit_id').value = this.getAttribute('data-id');
+            document.getElementById('edit_name_task').value = this.getAttribute('data-name-task');
+            document.getElementById('edit_owner_task').value = this.getAttribute('data-owner-task');
+            document.getElementById('edit_user_teams').value = this.getAttribute('data-user-teams');
             document.getElementById('edit_location_name').value = this.getAttribute('data-location-name');
-            const osServerSelect = document.getElementById('edit_os_server');
-            osServerSelect.value = this.getAttribute('data-os-server'); // Memastikan ini sesuai
-            
-            document.getElementById('edit_ip_address').value = this.getAttribute('data-ip-address');
-            document.getElementById('edit_port').value = this.getAttribute('data-port');
-            document.getElementById('edit_iot_category').value = this.getAttribute('data-iot-category');
-            document.getElementById('edit_implementation_date').value = this.getAttribute('data-implementation-date');
-            document.getElementById('edit_db_user').value = this.getAttribute('data-db-user');
-            document.getElementById('edit_db_password').value = this.getAttribute('data-db-password');
-            document.getElementById('edit_db_name').value = this.getAttribute('data-db-name');
-            document.getElementById('edit_ssh_user').value = this.getAttribute('data-ssh-user');
-            document.getElementById('edit_ssh_password').value = this.getAttribute('data-ssh-password');
-            document.getElementById('edit_anydesk_id').value = this.getAttribute('data-anydesk-id');
-            document.getElementById('edit_anydesk_password').value = this.getAttribute('data-anydesk-password');
-            document.getElementById('edit_last_update').value = this.getAttribute('data-last-update');
+            document.getElementById('edit_category_task').value = this.getAttribute('data-category-task');
+            document.getElementById('edit_system_category').value = this.getAttribute('data-system-category');
+            document.getElementById('edit_priority_task').value = this.getAttribute('data-priority-task');
+            document.getElementById('edit_status_task').value = this.getAttribute('data-status-task');
+            document.getElementById('edit_startdate_task').value = this.getAttribute('data-startdate-task');
+            document.getElementById('edit_enddate_task').value = this.getAttribute('data-enddate-task');
+            document.getElementById('edit_reason_task').value = this.getAttribute('data-reason-task');
+            document.getElementById('edit_constraint_task').value = this.getAttribute('data-constraint-task');
+            document.getElementById('edit_report_task').value = this.getAttribute('data-report-task');
+            document.getElementById('edit_outstanding_task').value = this.getAttribute('data-outstanding-task');
+            document.getElementById('edit_filename').value = this.getAttribute('data-file-name');
+            document.getElementById('edit_last-update').value = this.getAttribute('data-last-update');
         });
     });
 

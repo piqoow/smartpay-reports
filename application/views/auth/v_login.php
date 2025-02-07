@@ -1,5 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<?= base_url('assets/css/login.css'); ?>">
+<title>Smartpay Reports</title>
 <div class="main">
     <div class="container">
         <center>
@@ -20,7 +21,7 @@
                     </form>
                 </div>
                 <div class="logo">
-                    <img src="<?= base_url('assets/images/logo_cp.png'); ?>" alt="Logo">
+                    <img src="<?= base_url('assets/images/rnd_logo.png'); ?>" alt="Logo">
                     <p>Powered by SmartPay Technology</p>
                 </div>
             </div>

@@ -45,7 +45,7 @@ class IOT extends CI_Controller {
         } else {
             $this->session->set_flashdata('error', 'Complaint failed to send');
         }
-        redirect('iot');
+        redirect('iot-server');
     }
 
     public function delete() {
@@ -60,7 +60,7 @@ class IOT extends CI_Controller {
         }
         
         // Redirect kembali ke halaman IOT
-        redirect('iot');
+        redirect('iot-server');
     }
     //======================================= DDS =======================================// 
     
