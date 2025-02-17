@@ -6,7 +6,6 @@ class Administration extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(['url', 'form']);
-        $this->load->library(['email', 'form_validation']);
         $this->load->library('session');
         $this->load->model('M_administration');
     }
