@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">User Management</h1>
+    <h1 class="h3 mb-4 text-gray-800">Smartpay System</h1>
 
     <?php if($this->session->flashdata('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,9 +17,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Data</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
-                    <i class="fas fa-plus"></i> Add User
+                    <i class="fas fa-plus"></i> Add System
                 </button>
             </div>
         </div>
@@ -29,32 +29,38 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Level</th>
-                            <th>Teams</th>
+                            <th>Name System</th>
+                            <th>Category System</th>
+                            <th>URL</th>
+                            <th>Launching Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; foreach($users as $user): ?>
+                        <?php $no = 1; foreach($systems as $system): ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $user['username']; ?></td>
-                            <td><?= $user['user_email']; ?></td>
-                            <td><?= $user['user_level']; ?></td>
-                            <td><?= $user['user_teams']; ?></td>
+                            <td><?= $system['system_name']; ?></td>
+                            <td><?= $system['system_category']; ?></td>
+                            <td>
+                                <a href="<?= $system['system_url']; ?>" target="_blank">
+                                    <button class="btn btn-primary">
+                                        Go to System
+                                    </button>
+                                </a>
+                            </td>
+                            <td><?= $system['launching_date']; ?></td>
                             <td>
                                 <!-- Edit Button -->
-                                <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $user['id']; ?>" 
-                                        data-name="<?= $user['username']; ?>" data-email="<?= $user['user_email']; ?>"
-                                        data-level="<?= $user['user_level']; ?>" data-toggle="modal" data-target="#editUserModal">
+                                <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $system['id_system']; ?>" 
+                                        data-name="<?= $system['system_name']; ?>" data-category="<?= $system['system_category']; ?>"
+                                        data-url="<?= $system['system_url']; ?>" data-launching="<?= $system['launching_date']; ?>" data-toggle="modal" data-target="#editSystemModal" disabled>
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
                                 <!-- Delete Button -->
-                                <button class="btn btn-sm btn-danger delete-btn" data-id="<?= $user['id']; ?>" data-toggle="modal" data-target="#deleteUserModal">
+                                <!-- <button class="btn btn-sm btn-danger delete-btn" data-id="<?= $system['id_system']; ?>" data-toggle="modal" data-target="#deleteUserModal">
                                     <i class="fas fa-trash"></i> Delete
-                                </button>
+                                </button> -->
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -77,37 +83,27 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('user/add'); ?>" method="post">
+            <form action="<?= base_url('smartpay-system/add'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>User Name</label>
-                        <input type="text" class="form-control" name="username" required>
+                        <label>System Name</label>
+                        <input type="text" class="form-control" name="system_name" required>
                     </div>
                     <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="text" class="form-control" name="user_email">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" class="form-control" name="password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Level</label>
-                        <select class="form-control" name="user_level" id="user_level" required>
-                            <option value="Manager">Manager</option>
-                            <option value="Staff">Staff</option>
+                        <label>System Category</label>
+                        <select class="form-control" name="system_category" required>
+                            <option value="Webbased">Webbased</option>
+                            <!-- <option value="Staff">Staff</option> -->
                             <!-- <option value="User">User</option> -->
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Teams</label>
-                        <select class="form-control" name="user_teams" id="user_teams" required>
-                            <!-- <option value="SoftwareDev">SoftwareDev</option>
-                            <option value="Administration">Administration</option>
-                            <option value="ResearchAndDevelopment">Research And Development</option>
-                            <option value="IT_Support">IT Support</option>
-                            <option value="Cashless">Cashless</option> -->
-                        </select>
+                        <label>System Url</label>
+                        <input type="text" class="form-control" name="system_url" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Launching Date</label>
+                        <input type="date" class="form-control" name="launching_date" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -120,11 +116,11 @@
 </div>
 
 <!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="editSystemModal" tabindex="-1" role="dialog" aria-labelledby="editSystemModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                <h5 class="modal-title" id="editSystemModalLabel">Edit User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -245,42 +241,8 @@
             document.getElementById('edit_teams').value = userTeams;
 
             // Tampilkan modal edit
-            $('#editUserModal').modal('show');
+            $('#editSystemModal').modal('show');
         });
     });
-
-</script>
-<script>
-    function updateCategories() {
-        const category = document.getElementById('user_level').value;
-        const detailCategory = document.getElementById('user_teams');
-        
-        // Reset options
-        detailCategory.innerHTML = '';
-        
-        let options = [];
-
-        if (category === 'Manager') {
-            options = ['Dev'];
-
-        } else if (category === 'Staff') {
-            options = ['SoftwareDev', 'Administration', 'ResearchAndDevelopment', 'IT_Support', 'Cashless'];
-        
-        }
-
-        // Add options to the select element
-        options.forEach(option => {
-            const newOption = document.createElement('option');
-            newOption.value = option;
-            newOption.textContent = option;
-            detailCategory.appendChild(newOption);  // Corrected this line
-        });
-    }
-
-    // Call updateCategories when category is changed
-    document.getElementById('user_level').addEventListener('change', updateCategories);
-
-    // Call on window load to initialize the options
-    window.onload = updateCategories;
 
 </script>

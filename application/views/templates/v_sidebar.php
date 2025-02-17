@@ -15,7 +15,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Heading -->
-            <!-- <div class="sidebar-heading">
+            <div class="sidebar-heading">
                 Applications
             </div>
 
@@ -24,11 +24,12 @@
                     <i class="fas fa-fw fa-cogs"></i>
                     <span>Smartpay System</span>
                 </a>
-            </li> -->
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-<?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
+<!-- Manager/Dev -->
+<?php if($this->session->userdata('user_level') == 'dev' && $this->session->userdata('user_teams') == 'Dev'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Reporting
@@ -63,11 +64,121 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
+<?php elseif($this->session->userdata('user_level') == 'Manager' && $this->session->userdata('user_teams') == 'Dev'): ?>
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Reporting
+            </div>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('daily-task'); ?>">
+                    <i class="fas fa-fw fa-sign"></i>
+                    <span>Daily Task</span>
+                </a>
+            </li> -->
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Manage Assets
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-server'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>IOT Server</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Request Pettycash</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+<?php endif; ?>
+
+<!-- SoftwareDev -->
+<?php if($this->session->userdata('user_teams') == 'SoftwareDev'): ?>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reporting
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('daily-task'); ?>">
+                    <i class="fas fa-fw fa-sign"></i>
+                    <span>Daily Task</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Manage Assets
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-server'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>IOT Server</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Request Pettycash</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+<?php endif; ?>
+
+<!-- ResearchAndDevelopment -->
+<?php if($this->session->userdata('user_teams') == 'ResearchAndDevelopment'): ?>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reporting
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('daily-task'); ?>">
+                    <i class="fas fa-fw fa-sign"></i>
+                    <span>Daily Task</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Manage Assets
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-server'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>IOT Server</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Request Pettycash</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 <?php endif; ?>
 
 <!-- Administration -->
-<?php if($this->session->userdata('user_teams') == 'Administration' || $this->session->userdata('user_teams') == 'Dev'): ?>
+<?php if($this->session->userdata('user_teams') == 'Administration'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Administration
@@ -119,7 +230,7 @@
                 </div>
             </li> -->
 
-            <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
+            <?php if($this->session->userdata('user_teams') == 'Dev'): ?>
             <div class="sidebar-heading">
                 Dev Center
             </div>
@@ -158,7 +269,7 @@
             <div class="sidebar-heading">
                 Addons
             </div>
-            <?php if($this->session->userdata('user_level') == 'Dev'): ?>
+            <?php if($this->session->userdata('user_level') == ''): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('user'); ?>">
                         <i class="fas fa-fw fa-user"></i>
