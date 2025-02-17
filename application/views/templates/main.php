@@ -23,7 +23,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; CP-Helpdesk 2024</span>
+                        <span>Copyright &copy; Spontan Uhuy 2024</span>
                     </div>
                 </div>
                 <?php $this->load->view('templates/v_footer') ?>

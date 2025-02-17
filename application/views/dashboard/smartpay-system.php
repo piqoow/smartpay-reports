@@ -28,28 +28,35 @@
                 <table class="table table-bordered" id="dataTableUser" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Name System</th>
-                            <th>Category System</th>
-                            <th>URL</th>
-                            <th>Launching Date</th>
-                            <th>Action</th>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Name System</th>
+                            <th style="text-align: center;">Category System</th>
+                            <th style="text-align: center;">URL</th>
+                            <th style="text-align: center;">Launching Date</th>
+                            <th style="text-align: center;">User Login Dev</th>
+                            <th style="text-align: center;">Pass Login Dev</th>
+                            <th style="text-align: center;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1; foreach($systems as $system): ?>
                         <tr>
-                            <td><?= $no++; ?></td>
+                            <td style="text-align: center;"><?= $no++; ?></td>
                             <td><?= $system['system_name']; ?></td>
-                            <td><?= $system['system_category']; ?></td>
-                            <td>
-                                <a href="<?= $system['system_url']; ?>" target="_blank">
-                                    <button class="btn btn-primary">
-                                        Go to System
-                                    </button>
-                                </a>
+                            <td style="text-align: center;"><?= $system['system_category']; ?></td>
+                            <td style="text-align: center;">
+                                <?php if (empty($system['system_url']) || $system['system_url'] == '-'): ?>
+                                    <button class="btn btn-warning" disabled>Pending</button>
+                                <?php else: ?>
+                                    <a href="<?= $system['system_url']; ?>" target="_blank">
+                                        <button class="btn btn-primary">Open</button>
+                                        <!-- <p><?= $system['system_url']; ?></p> -->
+                                    </a>
+                                <?php endif; ?>
                             </td>
-                            <td><?= $system['launching_date']; ?></td>
+                            <td style="text-align: center;"><?= $system['launching_date']; ?></td>
+                            <td style="text-align: center;"><?= $system['user_login_dev']; ?></td>
+                            <td style="text-align: center;"><?= $system['pass_login_dev']; ?></td>
                             <td>
                                 <!-- Edit Button -->
                                 <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $system['id_system']; ?>" 
