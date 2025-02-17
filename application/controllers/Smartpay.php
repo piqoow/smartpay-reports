@@ -5,7 +5,7 @@ class Smartpay extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper('url');
+        $this->load->helper(['url', 'form']);
         $this->load->library('session');
         $this->load->model('M_smartpay');
     }
@@ -41,15 +41,13 @@ class Smartpay extends CI_Controller {
     }
 
     public function edit() {
-        // Ambil data dari form
         $id = $this->input->post('id');
         $username = $this->input->post('username');
         $email = $this->input->post('user_email');
-        $password = $this->input->post('password'); // Kosongkan jika tidak diubah
+        $password = $this->input->post('password');
         $level = $this->input->post('user_level');
         $teams = $this->input->post('user_teams');
     
-        // Jika password diubah, masukkan password baru, jika tidak kosongkan
         $data = [
             'username' => $username,
             'user_email' => $email,
@@ -58,17 +56,15 @@ class Smartpay extends CI_Controller {
         ];
     
         if (!empty($password)) {
-            $data['password'] = password_hash($password, PASSWORD_BCRYPT); // Pastikan mengenkripsi password
+            $data['password'] = password_hash($password, PASSWORD_BCRYPT);
         }
     
-        // Panggil model untuk memperbarui data user
         if ($this->M_user->updateUser($id, $data)) {
             $this->session->set_flashdata('success', 'User updated successfully');
         } else {
             $this->session->set_flashdata('error', 'Failed to update user');
         }
     
-        // Redirect kembali ke halaman user
         redirect('user');
     }
     

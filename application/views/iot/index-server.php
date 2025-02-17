@@ -71,12 +71,12 @@
                                             data-ssh-user="<?= $row['ssh_username']; ?>"
                                             data-ssh-password="<?= $row['ssh_password']; ?>"
                                             data-anydesk-id="<?= $row['anydesk_id']; ?>"
-                                            data-anydesk-password="<?= $row['anydesk_password']; ?>">
+                                            data-anydesk-password="<?= $row['anydesk_password']; ?>" disabled>
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
                                     <!-- Delete Button -->
                                     <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteIOTModal" 
-                                            data-id="<?= $row['id_iot']; ?>">
+                                            data-id="<?= $row['id_iot']; ?>" disabled>
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </td>
