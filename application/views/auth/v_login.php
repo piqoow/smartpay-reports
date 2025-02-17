@@ -22,7 +22,7 @@
                 </div>
                 <div class="logo">
                     <img src="<?= base_url('assets/images/rnd_logo.png'); ?>" alt="Logo">
-                    <p>Powered by SmartPay Technology</p>
+                    <!-- <p>Powered by</p> -->
                 </div>
             </div>
         </center>
