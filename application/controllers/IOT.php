@@ -14,11 +14,16 @@ class IOT extends CI_Controller {
     //======================================= SERVER IOT =======================================// 
 
     public function indexServer() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login');
+        }
         $data['dashboard'] = $this->M_iot->get_dashboard_data(); 
         $data['locations'] = $this->M_iot->get_locations(); 
         $data['title'] = 'IOT Form';
         $data['content'] = 'iot/index-server';
         $this->load->view('templates/main', $data);
+        $this->load->view('templates/v_footer');
+        $this->load->view('templates/v_header');
     }
 
     public function add() {

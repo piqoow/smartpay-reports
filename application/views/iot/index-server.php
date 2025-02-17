@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTableIOT" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -34,9 +34,6 @@
                             <th>IP Address : Port</th>
                             <th>IOT Category</th>
                             <th>Implementation Date</th>
-                            <th>DB User</th>
-                            <th>DB Password</th>
-                            <th>DB Name</th>
                             <th>SSH User</th>
                             <th>SSH Password</th>
                             <th>Anydesk ID</th>
@@ -49,40 +46,37 @@
                         <?php foreach ($dashboard as $row) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $row->location_name; ?></td>
-                                <td><?= $row->os_server; ?></td>
-                                <td><?= $row->ip_address; ?> : <?= $row->port; ?></td>
-                                <td><?= $row->iot_category; ?></td>
-                                <td><?= $row->implementation_date; ?></td>
-                                <td><?= $row->database_username; ?></td>
-                                <td><?= $row->database_password; ?></td>
-                                <td><?= $row->database_name; ?></td>
-                                <td><?= $row->ssh_username; ?></td>
-                                <td><?= $row->ssh_password; ?></td>
-                                <td><?= $row->anydesk_id; ?></td>
-                                <td><?= $row->anydesk_password; ?></td>
+                                <td><?= $row['location_name']; ?></td>
+                                <td><?= $row['os_server']; ?></td>
+                                <td><?= $row['ip_address']; ?> : <?= $row['port']; ?></td>
+                                <td><?= $row['iot_category']; ?></td>
+                                <td><?= $row['implementation_date']; ?></td>
+                                <td><?= $row['ssh_username']; ?></td>
+                                <td><?= $row['ssh_password']; ?></td>
+                                <td><?= $row['anydesk_id']; ?></td>
+                                <td><?= $row['anydesk_password']; ?></td>
                                 <td>
                                     <!-- Edit Button -->
                                     <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editIOTModal" 
-                                            data-id="<?= $row->id_iot; ?>"
-                                            data-location-name="<?= $row->location_name; ?>"
-                                            data-os-server="<?= $row->os_server; ?>"
-                                            data-ip-address="<?= $row->ip_address; ?>"
-                                            data-port="<?= $row->port; ?>"
-                                            data-iot-category="<?= $row->iot_category; ?>"
-                                            data-implementation-date="<?= $row->implementation_date; ?>"
-                                            data-db-user="<?= $row->database_username; ?>"
-                                            data-db-password="<?= $row->database_password; ?>"
-                                            data-db-name="<?= $row->database_name; ?>"
-                                            data-ssh-user="<?= $row->ssh_username; ?>"
-                                            data-ssh-password="<?= $row->ssh_password; ?>"
-                                            data-anydesk-id="<?= $row->anydesk_id; ?>"
-                                            data-anydesk-password="<?= $row->anydesk_password; ?>">
+                                            data-id="<?= $row['id_iot']; ?>"
+                                            data-location-name="<?= $row['location_name']; ?>"
+                                            data-os-server="<?= $row['os_server']; ?>"
+                                            data-ip-address="<?= $row['ip_address']; ?>"
+                                            data-port="<?= $row['port']; ?>"
+                                            data-iot-category="<?= $row['iot_category']; ?>"
+                                            data-implementation-date="<?= $row['implementation_date']; ?>"
+                                            data-db-user="<?= $row['database_username']; ?>"
+                                            data-db-password="<?= $row['database_password']; ?>"
+                                            data-db-name="<?= $row['database_name']; ?>"
+                                            data-ssh-user="<?= $row['ssh_username']; ?>"
+                                            data-ssh-password="<?= $row['ssh_password']; ?>"
+                                            data-anydesk-id="<?= $row['anydesk_id']; ?>"
+                                            data-anydesk-password="<?= $row['anydesk_password']; ?>">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
                                     <!-- Delete Button -->
                                     <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteIOTModal" 
-                                            data-id="<?= $row->id_iot; ?>">
+                                            data-id="<?= $row['id_iot']; ?>">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </td>
@@ -93,7 +87,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
@@ -126,6 +119,7 @@
                                 <select class="form-control" name="os_server" id="os_server" required>
                                     <option value="Ubuntu">Linux Ubuntu</option>
                                     <option value="Windows">Windows</option>
+                                    <option value="Raspberry">Raspberry</option>
                                 </select>
                             </div>
                         </div>
@@ -243,7 +237,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Location Name</label>
-                                <input type="text" class="form-control" name="location_name" id="edit_location_name" required>
+                                <input type="text" class="form-control" name="location_name" id="edit_location_name" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -252,6 +246,7 @@
                                 <select class="form-control" name="os_server" id="edit_os_server" required>
                                     <option value="Ubuntu">Linux Ubuntu</option>
                                     <option value="Windows">Windows</option>
+                                    <option value="Raspberry">Raspberry</option>
                                 </select>
                             </div>
                         </div>
@@ -408,4 +403,5 @@
             document.getElementById('delete_id').value = this.getAttribute('data-id');
         });
     });
+
 </script>

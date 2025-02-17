@@ -31,7 +31,22 @@ class Auth extends CI_Controller {
                 'logged_in' => TRUE
             ];
             $this->session->set_userdata($user_data);
-            redirect('daily-task');
+            // redirect('daily-task');
+
+            if ($user['user_teams'] == 'Dev' && $user['user_level'] == 'dev') { // Developer
+                redirect('dashboard');
+            } elseif ($user['user_teams'] == 'ResearchAndDevelopment' && $user['user_level'] == 'Staff') { // ResearchAndDevelopment
+                redirect('dashboard');
+            } elseif ($user['user_teams'] == 'SoftwareDev' && $user['user_level'] == 'Staff') { // SoftwareDev
+                redirect('dashboard');
+            } elseif ($user['user_teams'] == 'Manager' && $user['user_level'] == 'Staff') { // Manager
+                redirect('dashboard');
+            } elseif ($user['user_teams'] == 'Administration' && $user['user_level'] == 'Staff') { // Administration
+                redirect('petty-cash');
+            } else {
+                $this->session->set_flashdata('error', 'Our account cannot be access this system');
+                redirect('auth');
+            }
         } else {
             $this->session->set_flashdata('error', 'Invalid username or password');
             redirect('auth');

@@ -13,7 +13,7 @@ class M_iot extends CI_Model {
         $this->db->from('iot_system');
         $this->db->order_by('created_at', 'ASC'); 
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
     public function get_locations() {

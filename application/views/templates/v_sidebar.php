@@ -16,43 +16,19 @@
 
             <!-- Heading -->
             <!-- <div class="sidebar-heading">
-                Dashboard
-            </div> -->
+                Applications
+            </div>
 
-            <!-- Nav Item - Dashboard -->
-            <!-- <?php if($this->session->userdata('user_teams') == 'Helpdesk' || $this->session->userdata('user_teams') == 'Dev'): ?> -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('dashboard'); ?>">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assigment'); ?>">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>My Task</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('dashboard'); ?>">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span></a>
-            </li> -->
-            <!-- <?php else: ?> -->
-
-            <!-- Assigment Dashboard -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('assigment'); ?>">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>My Assigment</span></a>
-            </li> -->
-            <!-- <?php endif; ?> -->
-
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('dashboard'); ?>">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span>
+                <a class="nav-link" href="<?= base_url('smartpay-system'); ?>">
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Smartpay System</span>
                 </a>
             </li> -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
+<?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Reporting
@@ -78,6 +54,34 @@
                     <span>IOT Server</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Request Pettycash</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+<?php endif; ?>
+
+<!-- Administration -->
+<?php if($this->session->userdata('user_teams') == 'Administration' || $this->session->userdata('user_teams') == 'Dev'): ?>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Administration
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Request Pettycash</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+<?php endif; ?>
             
             <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManage"
@@ -115,7 +119,6 @@
                 </div>
             </li> -->
 
-            <hr class="sidebar-divider">
             <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
             <div class="sidebar-heading">
                 Dev Center
@@ -127,6 +130,8 @@
                     <span>User Manage</span>
                 </a>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
             <?php endif; ?>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -148,8 +153,6 @@
                 </div>
             </li> -->
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">

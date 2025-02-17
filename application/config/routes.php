@@ -71,13 +71,30 @@ $route['dashboard-task'] = 'task/indexDashboard';
 
 //IOT
 $route['iot-server'] = 'IOT/indexServer';
+$route['iot-server/edit-server/(:num)'] = 'IOT/editServer/$1';
+
 $route['iot-pgs'] = 'iot/indexPGS';
+$route['iot-pgs'] = 'iot/editPGS';
+
 $route['iot-dds'] = 'iot/indexDDS';
+$route['iot-dds'] = 'iot/indexDDS';
+
 $route['iot-tds'] = 'iot/indexTDS';
+$route['iot-tds'] = 'iot/indexTDS';
+
 $route['iot-eb'] = 'iot/indexEB';
+$route['iot-eb'] = 'iot/indexEB';
+
 // $route['iot'] = 'iot/index';
 // $route['iot'] = 'iot/index';
 // $route['iot'] = 'iot/index';
+
+
+//Administration
+$route['petty-cash'] = 'Administration/indexPettyCash';
+$route['petty-cash/addPettyCash'] = 'Administration/addPettyCash';
+$route['petty-cash/rejectPettyCash'] = 'Administration/rejectPettyCash';
+$route['petty-cash/updateTransfer'] = 'Administration/updateTransfer';
 
 
 //auth
