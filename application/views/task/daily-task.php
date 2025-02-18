@@ -1,5 +1,38 @@
+<script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css')?> ">
+<script src="<?= base_url('assets/js/toastr.min.js')?> "></script>
+<script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
+
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
+
+<?php if ($this->session->userdata('user_level') == 'dev') : ?>
+    <!-- Dropdown Filter for Status -->
+    <div class="row mb-4">
+    <div class="col-md-3">Choose Name :
+            <select id="nameFilter" class="form-control">
+            <option value="">All</option>
+            <?php foreach($usernames as $username): ?>
+                <option value="<?= $username['username'] ?>" <?= set_select('username', $username['username']); ?>><?= $username['username'] ?></option>
+            <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-md-3">Choose Division :
+            <select id="statusFilter" class="form-control">
+                <option value="">All</option>
+                <option value="Resolved">Resolved</option>
+                <option value="Pending">Pending</option>
+                <option value="Outstanding">Outstanding</option>
+                <option value="Recommendation Service">Recommendation Service</option>
+            </select>
+        </div>
+    </div>
+<?php endif; ?>
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"></h1>
@@ -25,7 +58,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTableTask" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -53,7 +86,7 @@
                                 <td><?= $row->status_task; ?></td>
                                 <td>
                                     <!-- Edit Button -->
-                                    <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editIOTModal" 
+                                    <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editTaskModal" 
                                             data-id="<?= $row->id_task; ?>"
                                             data-name-task="<?= $row->name_task; ?>"
                                             data-owner-task="<?= $row->owner_task; ?>"
@@ -77,8 +110,8 @@
                                     
                                     <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
                                     <!-- Delete Button -->
-                                    <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteIOTModal" 
-                                            data-id="<?= $row->id_task; ?>">
+                                    <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteTaskModal" 
+                                            data-id="<?= $row->id_task; ?>" disabled>
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                     <?php endif; ?>
@@ -106,14 +139,15 @@
             </div>
             <form action="<?= base_url('task/addDaily'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nama Pekerja</label>
                                 <input type="text" class="form-control" name="username" required>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <!-- new row -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -128,6 +162,7 @@
                                     <option value="">Select Category</option>
                                     <option value="Troubleshooting">Troubleshooting</option>
                                     <option value="Research">Research</option>
+                                    <option value="Coding">Coding</option>
                                     <option value="Deployment">Deployment</option>
                                     <option value="Setup New Location">Setup New Location</option>
                                     <option value="Maintenance">Maintenance</option>
@@ -138,17 +173,21 @@
                             </div>
                         </div>
                     </div>
+                    <!-- new row -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Kategori Sistem</label>
                                 <select class="form-control" name="system_category" id="system_category" required>
                                     <option value="">Select Category</option>
+                                    <option value="Apps">Apps</option>
+                                    <option value="Dashboard">Dashboard</option>
                                     <option value="Server">Server</option>
                                     <option value="PGS">PGS</option>
                                     <option value="DDS">DDS</option>
                                     <option value="TDS">TDS</option>
                                     <option value="EB">EB</option>
+                                    <option value="Others">Others</option>
                                 </select>
                             </div>
                         </div>
@@ -159,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- new row -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -176,6 +216,21 @@
                                     <option value="Pending">Pending</option>
                                     <option value="Outstanding">Outstanding</option>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- new row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Start Time</label>
+                                <input type="time" class="form-control" name="starttime_task" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>End Time</label>
+                                <input type="time" class="form-control" name="endtime_task" required>
                             </div>
                         </div>
                     </div>
@@ -233,11 +288,11 @@
 
 
 <!-- Edit IOT Modal -->
-<div class="modal fade" id="editIOTModal" tabindex="-1" role="dialog" aria-labelledby="editIOTModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editIOTModalLabel">Edit IOT</h5>
+                <h5 class="modal-title" id="editTaskModalLabel">Edit IOT</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -357,11 +412,11 @@
 
 
 <!-- Delete IOT Modal -->
-<div class="modal fade" id="deleteIOTModal" tabindex="-1" role="dialog" aria-labelledby="deleteIOTModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteIOTModalLabel">Delete IOT</h5>
+                <h5 class="modal-title" id="deleteTaskModalLabel">Delete IOT</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -461,3 +516,32 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#dataTableTask').DataTable({
+            "paging": true,
+            "pageLength": 10,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+
+        $('#nameFilter').on('change', function() {
+            var selectedStatus = $(this).val();
+            table.column(2).search(selectedStatus).draw();  // Column 3 is 'Status'
+        });
+
+        $('#statusFilter').on('change', function() {
+            var selectedStatus = $(this).val();
+            table.column(7).search(selectedStatus).draw();  // Column 3 is 'Status'
+        });
+    });
+
+    
+</script>
+</body>
+</html>

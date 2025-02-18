@@ -96,3 +96,18 @@
         });
     });
 </script>
+
+<!-- <script>
+    $(document).ready(function() {
+        var table = $('#dataTableTask').DataTable({
+            "paging": true,
+            "pageLength": 10,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script> -->

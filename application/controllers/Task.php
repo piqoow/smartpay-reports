@@ -6,16 +6,35 @@ class Task extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(['url', 'form']);
+        $this->load->library('session');
         $this->load->model('M_task');
     }
     
     //======================================= Daily Task =======================================// 
 
     public function indexDaily() {
-        $data['daily'] = $this->M_task->get_daily_task(); 
-        $data['title'] = 'Daily Task Form';
-        $data['content'] = 'task/daily-task';
-        $this->load->view('templates/main', $data);
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login');
+        }
+        $username = $this->session->userdata('username');
+        $userlevel = $this->session->userdata('user_level');
+
+        if ($userlevel == 'dev') {
+            $data['daily'] = $this->M_task->get_daily_task(); 
+            $data['usernames'] = $this->M_task->get_all_username(); 
+            $data['title'] = 'Daily Task Form';
+            $data['content'] = 'task/daily-task';
+            $this->load->view('templates/main', $data);
+            $this->load->view('templates/v_footer');
+            $this->load->view('templates/v_header');
+        } else {
+            $data['daily'] = $this->M_task->get_daily_task_by_username(); 
+            $data['title'] = 'Daily Task Form';
+            $data['content'] = 'task/daily-task';
+            $this->load->view('templates/main', $data);
+            $this->load->view('templates/v_footer');
+            $this->load->view('templates/v_header');
+        }
     }
 
     public function addDaily() {
@@ -42,7 +61,8 @@ class Task extends CI_Controller {
     
         $data = array(
             'name_task' => $this->input->post('name_task'),
-            'owner_task' => $this->input->post('username'),
+            // 'owner_task' => $this->input->post('username'),
+            'owner_task' => $this->session->userdata('username'),
             'user_teams' => $this->session->userdata('user_teams'),
             'location_name' => $this->input->post('location_name'),
             'category_task' => $this->input->post('category_task'),
@@ -50,13 +70,16 @@ class Task extends CI_Controller {
             'priority_task' => $this->input->post('startdate_task'),
             'status_task' => $this->input->post('status_task'),
             'startdate_task' => $this->input->post('startdate_task'),
-            'enddate_task' => $this->input->post('startdate_task'),
+            'enddate_task' => $this->input->post('enddate_task'),
+            'starttime_task' => $this->input->post('starttime_task'),
+            'endtime_task' => $this->input->post('endtime_task'),
             'report_task' => $this->input->post('report_task'),
             'outstanding_task' => $this->input->post('outstanding_task'),
             'file_name' => $filePath,
             'constraint_task' => $this->input->post('constraint_task'),
             'reason_task' => $this->input->post('reason_task'),
             'created_at' => $datenow->format('Y-m-d H:i:s'),
+            'updated_at' => $datenow->format('Y-m-d H:i:s'),
         );
     
         if ($this->M_task->saveData($data)) {

@@ -139,8 +139,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; foreach($pettycash as $row): ?>
-                        <tr>
+                        <?php $no = 1; foreach($pettycash as $row): 
+                            date_default_timezone_set('Asia/Jakarta');
+
+                            $created_at = strtotime($row['created_at']);
+                            $today = strtotime(date('Y-m-d H:i:s'));
+                            $time_diff = $today - $created_at;
+                            $days_diff = floor($time_diff / (60 * 60 * 24));
+
+                            $row_style = '';
+                            if ($days_diff > 2 && $row['status'] != 'Transfered') {
+
+                                $row_style = 'animation: blink 2s linear infinite;';
+                            }
+                            ?>
+                        <tr style="<?= $row_style ?>">
+                            <style>
+                                @keyframes blink {
+                                    0% { background-color: #ffcdd2; }
+                                    50% { background-color: #ffffff; }
+                                    100% { background-color: #ffcdd2; }
+                                }
+                            </style>
                             <td><?= $no++; ?></td>
                             <td><?= $row['location_name']; ?></td>
                             <td><?= $row['po_number']; ?></td>

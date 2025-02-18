@@ -8,6 +8,15 @@ class M_task extends CI_Model {
         $this->locations = $this->load->database('locations', TRUE);
     }
 
+    public function get_all_username() {
+        // $username = $this->session->userdata('username');
+        $this->db->select('*');
+        $this->db->from('tb_user');
+        $this->db->order_by('username', 'ASC'); 
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
     //======================================= Daily Task Teams =======================================// 
 
     public function get_daily_task() {
@@ -18,6 +27,18 @@ class M_task extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function get_daily_task_by_username() {
+        $username = $this->session->userdata('username');
+        $this->db->select('*');
+        $this->db->from('smartpay_task');        
+        $this->db->where('owner_task', $username);
+        $this->db->order_by('created_at', 'ASC');
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
 
     //======================================= Dashboard All Task =======================================// 
 
