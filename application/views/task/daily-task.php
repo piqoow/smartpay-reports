@@ -1,4 +1,4 @@
-<script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
 <link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css')?> ">
 <script src="<?= base_url('assets/js/toastr.min.js')?> "></script>
 <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
@@ -98,13 +98,15 @@
                                             data-status-task="<?= $row->status_task; ?>"
                                             data-startdate-task="<?= $row->startdate_task; ?>"
                                             data-enddate-task="<?= $row->enddate_task; ?>"
+                                            data-starttime-task="<?= $row->starttime_task; ?>"
+                                            data-endtime-task="<?= $row->endtime_task; ?>"
                                             data-reason-task="<?= $row->reason_task; ?>"
                                             data-constraint-task="<?= $row->constraint_task; ?>"
                                             data-report-task="<?= $row->report_task; ?>"
                                             data-outstanding-task="<?= $row->outstanding_task; ?>"
                                             data-file-name="<?= $row->file_name; ?>"
                                             data-last-update="<?= $row->created_at; ?>"
-                                            disabled>
+                                            >
                                         <i class="fas fa-file"></i> Detail
                                     </button>
                                     
@@ -114,6 +116,10 @@
                                             data-id="<?= $row->id_task; ?>" disabled>
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
+                                    <!-- Show Data Link -->
+                                    <a href="<?= base_url($row->file_name); ?>" class="btn btn-sm btn-danger" target="_blank">
+                                        <i class="fas fa-file"></i> Show
+                                    </a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -293,7 +299,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editTaskModalLabel">Edit IOT</h5>
+                <h5 class="modal-title" id="editTaskModalLabel">Detail Task</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -318,93 +324,79 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Kategori Task</label>
+                                <label>Location Name</label>
+                                <input type="text" class="form-control" name="location_name" id="edit_location_name" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Category Task</label>
                                 <input type="text" class="form-control" name="category_task" id="edit_category_task" disabled>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Kategori Sistem</label>
+                                <label>System Name</label>
                                 <input type="text" class="form-control" name="system_category" id="edit_system_category" disabled>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Port</label>
-                                <input type="text" class="form-control" name="port" id="edit_port" disabled>
+                                <label>Status Task</label>
+                                <input type="text" class="form-control" name="status_task" id="edit_status_task" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="text" class="form-control" name="startdate_task" id="edit_startdate_task" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>IOT Category</label>
-                                <input type="text" class="form-control" name="iot_category" id="edit_iot_category" disabled>
+                                <label>Start Time</label>
+                                <input type="text" class="form-control" name="starttime_task" id="edit_starttime_task" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>DB User</label>
-                                <input type="text" class="form-control" name="database_username" id="edit_db_user" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>DB Password</label>
-                                <input type="text" class="form-control" name="database_password" id="edit_db_password" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>DB Name</label>
-                                <input type="text" class="form-control" name="database_name" id="edit_db_name" disabled>
+                                <label>End Time</label>
+                                <input type="text" class="form-control" name="endtime_task" id="edit_endtime_task" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>SSH User</label>
-                                <input type="text" class="form-control" name="ssh_username" id="edit_ssh_user" disabled>
+                                <label>Report Task</label>
+                                <textarea type="text" class="form-control" name="report_task" id="edit_report_task" rows="4" disabled></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>SSH Password</label>
-                                <input type="text" class="form-control" name="ssh_password" id="edit_ssh_password" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Anydesk ID</label>
-                                <input type="text" class="form-control" name="anydesk_id" id="edit_anydesk_id" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Anydesk Password</label>
-                                <input type="text" class="form-control" name="anydesk_password" id="edit_anydesk_password" disabled>
+                                <label>Kendala Troubleshooting</label>
+                                <textarea type="text" class="form-control" name="reason_task" id="edit_reason_task" rows="4" disabled></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Implementation Date</label>
-                                <input type="date" class="form-control" name="implementation_date" id="edit_implementation_date" disabled>
+                                <label>Penyebab Troubleshooting</label>
+                                <textarea type="text" class="form-control" name="constraint_task" id="edit_constraint_task" rows="4" disabled></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <!-- <button type="submit" class="btn btn-primary">Update</button> -->
                 </div>
             </form>
         </div>
@@ -492,22 +484,26 @@
             document.getElementById('edit_id').value = this.getAttribute('data-id');
             document.getElementById('edit_name_task').value = this.getAttribute('data-name-task');
             document.getElementById('edit_owner_task').value = this.getAttribute('data-owner-task');
-            document.getElementById('edit_user_teams').value = this.getAttribute('data-user-teams');
+            // document.getElementById('edit_user_teams').value = this.getAttribute('data-user-teams');
             document.getElementById('edit_location_name').value = this.getAttribute('data-location-name');
             document.getElementById('edit_category_task').value = this.getAttribute('data-category-task');
             document.getElementById('edit_system_category').value = this.getAttribute('data-system-category');
-            document.getElementById('edit_priority_task').value = this.getAttribute('data-priority-task');
+            // document.getElementById('edit_priority_task').value = this.getAttribute('data-priority-task');
             document.getElementById('edit_status_task').value = this.getAttribute('data-status-task');
             document.getElementById('edit_startdate_task').value = this.getAttribute('data-startdate-task');
-            document.getElementById('edit_enddate_task').value = this.getAttribute('data-enddate-task');
+            document.getElementById('edit_starttime_task').value = this.getAttribute('data-starttime-task');
+            document.getElementById('edit_endtime_task').value = this.getAttribute('data-endtime-task');
+            // document.getElementById('edit_enddate_task').value = this.getAttribute('data-enddate-task');
             document.getElementById('edit_reason_task').value = this.getAttribute('data-reason-task');
             document.getElementById('edit_constraint_task').value = this.getAttribute('data-constraint-task');
             document.getElementById('edit_report_task').value = this.getAttribute('data-report-task');
-            document.getElementById('edit_outstanding_task').value = this.getAttribute('data-outstanding-task');
-            document.getElementById('edit_filename').value = this.getAttribute('data-file-name');
-            document.getElementById('edit_last-update').value = this.getAttribute('data-last-update');
+            // document.getElementById('edit_outstanding_task').value = this.getAttribute('data-outstanding-task');
+            // document.getElementById('edit_filename').value = this.getAttribute('data-file-name');
+            // document.getElementById('edit_last-update').value = this.getAttribute('data-last-update');
         });
     });
+
+
 
 
     // Delete Button Handler
