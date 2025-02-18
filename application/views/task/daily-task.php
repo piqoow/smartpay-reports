@@ -112,13 +112,13 @@
                                     
                                     <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
                                     <!-- Delete Button -->
-                                    <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteTaskModal" 
+                                    <!-- <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteTaskModal" 
                                             data-id="<?= $row->id_task; ?>" disabled>
                                         <i class="fas fa-trash"></i> Delete
-                                    </button>
+                                    </button> -->
                                     <!-- Show Data Link -->
                                     <a href="<?= base_url($row->file_name); ?>" class="btn btn-sm btn-danger" target="_blank">
-                                        <i class="fas fa-file"></i> Show
+                                        <i class="fas fa-file"></i> OpenFile
                                     </a>
                                     <?php endif; ?>
                                 </td>
