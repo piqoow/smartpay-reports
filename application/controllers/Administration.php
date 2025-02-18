@@ -112,9 +112,9 @@ class Administration extends CI_Controller {
         } else {
             $filePath = null;
             $this->session->set_flashdata('error', $this->upload->display_errors());
-        }
+            log_message('error', 'Upload error: ' . $this->upload->display_errors());
+        }        
     
-        // Get the ID and update bukti_transfer
         $id_pc = $this->input->post('id_pc');
         $data = [
             'status' => 'Transfered',
@@ -126,8 +126,13 @@ class Administration extends CI_Controller {
             $this->session->set_flashdata('success', 'Bukti transfer updated successfully');
         } else {
             $this->session->set_flashdata('error', 'Failed to update bukti transfer');
+            log_message('error', 'Database update failed: ' . $this->db->last_query());
         }
-    
+        // var_dump($id_pc);
+        // var_dump($this->input->post('transfer_date'));
+        // var_dump($filePath);
+        // exit; // Untuk menghentikan eksekusi dan melihat hasilnya
+            
         redirect('petty-cash');
     }
     

@@ -123,19 +123,19 @@
                 <table class="table table-bordered" id="dataTablePetCash" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Lokasi</th>
-                            <th>Nomor PO -</th>
-                            <th>Tanggal Request</th>
-                            <th>Request Dana</th>
-                            <th>Nomor Rekening Tujuan</th>
-                            <th>Jenis Request</th>
-                            <th>Keterangan</th>
-                            <th>Bukti Nota</th>
-                            <th>Status</th>
-                            <th>Bukti Transfer</th>
-                            <th>Tanggal Transfer</th>
-                            <th>Action</th>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Nama Lokasi</th>
+                            <th style="text-align: center;">Nomor PO</th>
+                            <th style="text-align: center;">Tanggal Request</th>
+                            <th style="text-align: center;">Request Dana</th>
+                            <th style="text-align: center;">Nomor Rekening Tujuan</th>
+                            <th style="text-align: center;">Jenis Request</th>
+                            <th style="text-align: center;">Keterangan</th>
+                            <th style="text-align: center;">Bukti Nota</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Bukti Transfer</th>
+                            <th style="text-align: center;">Tanggal Transfer</th>
+                            <th style="text-align: center;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@
                                     <?= $row['transfer_date']; ?>
                                 <?php endif; ?>
                             </td>	
-                            <td>
+                            <td style="text-align: center;">
                                 <?php if ($row['status'] != 'Transfered'): ?>
                                     <!-- Tombol Update hanya aktif jika status bukan 'Transfered' -->
                                     <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $row['id_pc']; ?>" 
@@ -245,7 +245,7 @@
                 <form id="updateTransferForm" method="post" action="<?= base_url('administration/updateTransfer'); ?>" enctype="multipart/form-data">
                     <input type="hidden" name="id_pc" id="id_pc">
                     <div class="form-group">
-                        <label for="transfer_date">Upload Bukti Transfer</label>
+                        <label for="transfer_date">Tanggal Transfer</label>
                         <input type="date" class="form-control" id="transfer_date" name="transfer_date" required>
                     </div>
                     <div class="form-group">
@@ -263,12 +263,9 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        // When the update button is clicked
-        $(".edit-btn").click(function() {
-            var id = $(this).data('id');
-            // Set the id of the petty cash to be updated
-            $("#id_pc").val(id);
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('id_pc').value = this.getAttribute('data-id');
         });
     });
 </script>
@@ -319,6 +316,17 @@
 
 <script>
     document.getElementById('bukti_nota').addEventListener('change', function(event) {
+        if (event.target.files.length > 0) {
+            var fileName = event.target.files[0].name;
+            console.log('File selected: ' + fileName);
+        } else {
+            console.log('No file selected');
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('bukti_transfer').addEventListener('change', function(event) {
         if (event.target.files.length > 0) {
             var fileName = event.target.files[0].name;
             console.log('File selected: ' + fileName);

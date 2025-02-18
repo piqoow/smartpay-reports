@@ -88,7 +88,7 @@ $route['iot-eb'] = 'iot/indexEB';
 $route['petty-cash'] = 'Administration/indexPettyCash';
 $route['petty-cash/addPettyCash'] = 'Administration/addPettyCash';
 $route['petty-cash/rejectPettyCash'] = 'Administration/rejectPettyCash';
-$route['petty-cash/updateTransfer'] = 'Administration/updateTransfer';
+// $route['administration/updateTransfer'] = 'Administration/updateTransfer';
 
 
 //auth

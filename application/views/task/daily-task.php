@@ -174,6 +174,7 @@
                                     <option value="Resolved">Resolved</option>
                                     <option value="Recommendation Service">Recommendation Service</option>
                                     <option value="Pending">Pending</option>
+                                    <option value="Outstanding">Outstanding</option>
                                 </select>
                             </div>
                         </div>
