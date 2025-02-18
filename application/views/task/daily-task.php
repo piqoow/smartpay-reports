@@ -11,7 +11,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-<?php if ($this->session->userdata('user_level') == 'dev') : ?>
+<?php if ($this->session->userdata('user_level') == 'dev' || $this->session->userdata('user_level') == 'Manager') : ?>
     <!-- Dropdown Filter for Status -->
     <div class="row mb-4">
     <div class="col-md-3">Choose Name :
@@ -256,7 +256,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Report</label>
-                                <input type="text" class="form-control" name="report_task" required>
+                                <textarea class="form-control" name="report_task" rows="4" required></textarea>
+                                <!-- <input type="text" class="form-control" name="report_task" required> -->
                             </div>
                         </div>
                         <div class="col-md-6">
