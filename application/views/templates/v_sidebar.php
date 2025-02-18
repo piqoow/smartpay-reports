@@ -28,7 +28,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-<!-- Manager/Dev -->
+<!-- Dev -->
 <?php if($this->session->userdata('user_level') == 'dev' && $this->session->userdata('user_teams') == 'Dev'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -65,6 +65,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+<!-- Manager -->
 <?php elseif($this->session->userdata('user_level') == 'Manager' && $this->session->userdata('user_teams') == 'Dev'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
