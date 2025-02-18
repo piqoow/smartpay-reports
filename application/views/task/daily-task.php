@@ -22,7 +22,7 @@
             <?php endforeach; ?>
             </select>
         </div>
-        <div class="col-md-3">Choose Division :
+        <div class="col-md-3">Choose Status :
             <select id="statusFilter" class="form-control">
                 <option value="">All</option>
                 <option value="Resolved">Resolved</option>
@@ -104,7 +104,7 @@
                                             data-outstanding-task="<?= $row->outstanding_task; ?>"
                                             data-file-name="<?= $row->file_name; ?>"
                                             data-last-update="<?= $row->created_at; ?>"
-                                            >
+                                            disabled>
                                         <i class="fas fa-file"></i> Detail
                                     </button>
                                     
