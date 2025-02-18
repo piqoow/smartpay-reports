@@ -19,7 +19,7 @@ class Task extends CI_Controller {
         $username = $this->session->userdata('username');
         $userlevel = $this->session->userdata('user_level');
 
-        if ($userlevel == 'dev') {
+        if ($userlevel == 'dev' || $userlevel == 'Manager') {
             $data['daily'] = $this->M_task->get_daily_task(); 
             $data['usernames'] = $this->M_task->get_all_username(); 
             $data['title'] = 'Daily Task Form';

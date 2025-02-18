@@ -64,9 +64,10 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
+
 <?php elseif($this->session->userdata('user_level') == 'Manager' && $this->session->userdata('user_teams') == 'Dev'): ?>
             <!-- Heading -->
-            <!-- <div class="sidebar-heading">
+            <div class="sidebar-heading">
                 Reporting
             </div>
 
@@ -75,9 +76,9 @@
                     <i class="fas fa-fw fa-sign"></i>
                     <span>Daily Task</span>
                 </a>
-            </li> -->
+            </li>
             <!-- Divider -->
-            <!-- <hr class="sidebar-divider"> -->
+            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
