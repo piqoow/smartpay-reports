@@ -1,4 +1,4 @@
-<!-- <script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
 <link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css')?> ">
 <script src="<?= base_url('assets/js/toastr.min.js')?> "></script>
 <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
