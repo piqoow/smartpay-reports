@@ -193,6 +193,7 @@
                                     <option value="DDS">DDS</option>
                                     <option value="TDS">TDS</option>
                                     <option value="EB">EB</option>
+                                    <option value="EV Charger">EV Charger</option>
                                     <option value="Others">Others</option>
                                 </select>
                             </div>
