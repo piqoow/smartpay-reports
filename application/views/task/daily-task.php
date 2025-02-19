@@ -110,7 +110,7 @@
                                         <i class="fas fa-file"></i> Detail
                                     </button>
                                     
-                                    <?php if($this->session->userdata('user_teams') == 'SoftwareDev' || $this->session->userdata('user_teams') == 'Dev'): ?>
+                                    <?php if($this->session->userdata('user_level') == 'Manager' || $this->session->userdata('user_level') == 'Staff'): ?>
                                     <!-- Delete Button -->
                                     <!-- <button class="btn btn-sm btn-danger delete-btn" data-toggle="modal" data-target="#deleteTaskModal" 
                                             data-id="<?= $row->id_task; ?>" disabled>
