@@ -96,7 +96,7 @@
         });
     });
 </script>
-
+<!-- 
 <script>
     $(document).ready(function() {
         var table = $('#dataTableTask').DataTable({
@@ -110,4 +110,4 @@
             "responsive": true,
         });
     });
-</script>
+</script> -->
