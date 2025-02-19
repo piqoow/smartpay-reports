@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Request Dana</label>
+                                <label>Nominal Request Dana</label>
                                 <input type="number" class="form-control" name="request_dana" required>
                             </div>
                         </div>
@@ -60,6 +60,7 @@
                             <div class="form-group">
                                 <label>Rekening Tujuan</label>
                                 <select class="form-control" name="rekening_tujuan" id="rekening_tujuan" required>
+                                    <option value="">Pilih Rekening</option>
                                     <?php foreach($rekenings as $rekening): ?>
                                         <option value="<?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?>" <?= set_select('nama_rekening', $rekening['nama_rekening']); ?>><?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?></option>
                                     <?php endforeach; ?>
@@ -72,7 +73,7 @@
                             <div class="form-group">
                                 <label>Kategori Request</label>
                                 <select class="form-control" name="kategori_request" id="kategori_request" required>
-                                    <option value="">Select Category</option>
+                                    <option value="">Pilih Kategori</option>
                                     <option value="Internet">Internet</option>
                                     <option value="R&D">R&D</option>
                                     <option value="Dinas">Dinas</option>
