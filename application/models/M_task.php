@@ -23,7 +23,7 @@ class M_task extends CI_Model {
         $user_teams = $this->session->userdata('user_teams');
         $this->db->select('*');
         $this->db->from('smartpay_task');
-        $this->db->order_by('startdate_task', 'ASC'); 
+        $this->db->order_by('startdate_task', 'DESC'); 
         $query = $this->db->get();
         return $query->result();
     }
@@ -33,7 +33,7 @@ class M_task extends CI_Model {
         $this->db->select('*');
         $this->db->from('smartpay_task');        
         $this->db->where('owner_task', $username);
-        $this->db->order_by('startdate_task', 'ASC');
+        $this->db->order_by('startdate_task', 'DESC');
         
         $query = $this->db->get();
         return $query->result();
