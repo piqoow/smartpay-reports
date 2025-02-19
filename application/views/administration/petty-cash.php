@@ -89,7 +89,8 @@
                                 <!-- <select class="form-control" name="kategori_detail" id="kategori_detail" required>
                                     <option value="">Select Category</option>
                                 </select>                        -->
-                                <input type="text" class="form-control" name="kategori_detail" id="kategori_detail" required>
+                                <!-- <input type="text" class="form-control" name="kategori_detail" id="kategori_detail" required> -->
+                                <textarea class="form-control" name="kategori_detail" rows="4" required></textarea>
                             </div>
                         </div>
                     </div>
