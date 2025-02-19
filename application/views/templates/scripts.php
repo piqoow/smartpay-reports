@@ -97,7 +97,7 @@
     });
 </script>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
         var table = $('#dataTableTask').DataTable({
             "paging": true,
@@ -110,4 +110,4 @@
             "responsive": true,
         });
     });
-</script> -->
+</script>
