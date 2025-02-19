@@ -85,9 +85,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="kategori_detail">Keterangan Detail</label>
-                                <select class="form-control" name="kategori_detail" id="kategori_detail" required>
+                                <!-- <select class="form-control" name="kategori_detail" id="kategori_detail" required>
                                     <option value="">Select Category</option>
-                                </select>                       
+                                </select>                        -->
+                                <input type="text" class="form-control" name="kategori_detail" id="kategori_detail" required>
                             </div>
                         </div>
                     </div>
