@@ -101,10 +101,9 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-<?php endif; ?>
 
 <!-- SoftwareDev -->
-<?php if($this->session->userdata('user_teams') == 'SoftwareDev'): ?>
+<?php elseif($this->session->userdata('user_level') == 'Staff' && $this->session->userdata('user_teams') == 'SoftwareDev'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Reporting
@@ -131,18 +130,17 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Request Pettycash</span>
                 </a>
-            </li>
+            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
-<?php endif; ?>
 
-<!-- ResearchAndDevelopment -->
-<?php if($this->session->userdata('user_teams') == 'ResearchAndDevelopment'): ?>
+<!-- RND -->
+<?php elseif($this->session->userdata('user_level') == 'Staff' && $this->session->userdata('user_teams') == 'ResearchAndDevelopment'): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Reporting
@@ -169,12 +167,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Request Pettycash</span>
                 </a>
-            </li>
+            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 <?php endif; ?>
