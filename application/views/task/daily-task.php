@@ -83,10 +83,21 @@
                                 <td><?= $row->category_task; ?></td>
                                 <td><?= $row->location_name; ?></td>
                                 <td><?= $row->report_task; ?></td>
-                                <td><?= $row->status_task; ?></td>
+                                <td>
+                                    <?php if ($row->status_task != 'Resolved'): ?>
+                                        <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#UpdateTaskModal"
+                                        data-id="<?= $row->id_task; ?>"
+                                        >
+                                        Update
+                                        </button>
+                                    <?php else: ?>
+                                        <?= $row->status_task; ?>
+                                    <?php endif; ?>
+                                </td>
+
                                 <td>
                                     <!-- Edit Button -->
-                                    <button class="btn btn-sm btn-warning edit-btn" data-toggle="modal" data-target="#editTaskModal" 
+                                    <button class="btn btn-sm btn-success edit-btn" data-toggle="modal" data-target="#DetailTaskModal" 
                                             data-id="<?= $row->id_task; ?>"
                                             data-name-task="<?= $row->name_task; ?>"
                                             data-owner-task="<?= $row->owner_task; ?>"
@@ -107,7 +118,8 @@
                                             data-file-name="<?= $row->file_name; ?>"
                                             data-last-update="<?= $row->created_at; ?>"
                                             >
-                                        <i class="fas fa-file"></i> Detail
+                                        <!-- <i class="fas fa-file"></i>  -->
+                                        Detail
                                     </button>
                                     
                                     <?php if($this->session->userdata('user_level') == 'dev' || $this->session->userdata('user_level') == 'Manager' || $this->session->userdata('user_level') == 'Staff'): ?>
@@ -294,13 +306,49 @@
     </div>
 </div>
 
-
-<!-- Edit IOT Modal -->
-<div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="UpdateTaskModal" tabindex="-1" role="dialog" aria-labelledby="UpdateTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editTaskModalLabel">Detail Task</h5>
+                <h5 class="modal-title" id="UpdateTaskModalLabel">Update Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('task/editDaily') ?>" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="task_id" id="task-id">
+                    <!-- <input type="text" name="task_id" id="task-id" disabled> -->
+
+                    <div class="form-group">
+                        <label for="last-report">Last Report</label>
+                        <textarea class="form-control" id="last-report" name="last_report" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" name="status" required>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit IOT Modal -->
+<div class="modal fade" id="DetailTaskModal" tabindex="-1" role="dialog" aria-labelledby="DetailTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DetailTaskModalLabel">Detail Task</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -539,7 +587,17 @@
         });
     });
 
-    
+    $(document).ready(function() {
+    // Menangkap event ketika tombol Update diklik
+    $('.edit-btn').on('click', function() {
+        // Mendapatkan nilai task_id dari data-id tombol
+        var taskId = $(this).data('id');
+
+        // Memasukkan nilai task_id ke dalam elemen input dengan id task-id di modal
+        $('#task-id').val(taskId);
+    });
+});
+
 </script>
 </body>
 </html>

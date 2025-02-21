@@ -90,6 +90,29 @@ class Task extends CI_Controller {
         redirect('daily-task');
     }
     
+    public function editDaily() {
+        date_default_timezone_set('Asia/Jakarta');
+        $task_id = $this->input->post('task_id');
+        $last_report = $this->input->post('last_report');
+        $status = $this->input->post('status');
+        $today = date('Y-m-d H:i:s');
+        
+        $update_data = [
+            'resolve_outstanding_date' => $today,
+            'resolve_outstanding' => $last_report,
+            'status_task' => $status
+        ];
+
+        $result = $this->M_task->update_task($task_id, $update_data);
+
+        if ($result) {
+            $this->session->set_flashdata('success', 'Task updated successfully!');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to update task!');
+        }
+
+        redirect('daily-task');
+    }
 
     public function deleteDaily() {
         $id = $this->input->post('id');

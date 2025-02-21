@@ -39,6 +39,10 @@ class M_task extends CI_Model {
         return $query->result();
     }
     
+    public function update_task($task_id, $data) {
+        $this->db->where('id_task', $task_id);
+        return $this->db->update('smartpay_task', $data);
+    }
 
     //======================================= Dashboard All Task =======================================// 
 

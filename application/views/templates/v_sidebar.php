@@ -26,7 +26,7 @@
                 </a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
 <!-- Dev -->
 <?php if($this->session->userdata('user_level') == 'dev' && $this->session->userdata('user_teams') == 'Dev'): ?>
@@ -105,6 +105,9 @@
 <!-- SoftwareDev -->
 <?php elseif($this->session->userdata('user_level') == 'Staff' && $this->session->userdata('user_teams') == 'SoftwareDev'): ?>
             <!-- Heading -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Heading -->
             <div class="sidebar-heading">
                 Reporting
             </div>
@@ -115,11 +118,10 @@
                     <span>Daily Task</span>
                 </a>
             </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
+            <hr class="sidebar-divider my-0">
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <!-- <div class="sidebar-heading">
                 Manage Assets
             </div>
 
@@ -128,7 +130,7 @@
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>IOT Server</span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
@@ -137,7 +139,7 @@
                 </a>
             </li> -->
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
 <!-- RND -->
 <?php elseif($this->session->userdata('user_level') == 'Staff' && $this->session->userdata('user_teams') == 'ResearchAndDevelopment'): ?>
