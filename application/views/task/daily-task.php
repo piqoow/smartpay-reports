@@ -297,7 +297,10 @@
                         </div>
                     </div> -->
 
-
+                </div>
+                <div class="col">
+                <p> *Mengisi daily task sebelum memulai pekerjaan</p>
+                <p>  Update kemudian setelah menyelesaikan pekerjaan</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
