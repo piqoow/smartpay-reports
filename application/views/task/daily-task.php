@@ -225,13 +225,20 @@
                     </div>
                     <!-- new row -->
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tanggal Report</label>
                                 <input type="date" class="form-control" name="startdate_task" required>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Report</label>
+                                <textarea class="form-control" name="report_task" rows="4" required></textarea>
+                                <!-- <input type="text" class="form-control" name="report_task" required> -->
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" name="status_task" id="status_task" required>
@@ -242,10 +249,16 @@
                                     <option value="Outstanding">Outstanding</option>
                                 </select>
                             </div>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Outstanding</label>
+                                <input type="text" class="form-control" name="outstanding_task" placeholder="">
+                            </div>
                         </div>
                     </div>
                     <!-- new row -->
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Start Time</label>
@@ -258,7 +271,7 @@
                                 <input type="time" class="form-control" name="endtime_task" required>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <!-- Additional fields for Troubleshooting -->
                     <div class="row" id="troubleshooting-fields" style="display: none;">
@@ -275,31 +288,14 @@
                             </div>
                         </div>
                     </div>
-
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Report</label>
-                                <textarea class="form-control" name="report_task" rows="4" required></textarea>
-                                <!-- <input type="text" class="form-control" name="report_task" required> -->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Outstanding</label>
-                                <input type="text" class="form-control" name="outstanding_task" placeholder="kosongkan jika selesai">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    <!-- <div class="row" id="resolved-fields" style="display: none;">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Upload File</label>
-                                <input type="file" class="form-control" name="file_name" id="file_name" required>
+                                <input type="file" class="form-control" name="file_name" id="file_name">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -322,7 +318,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('task/editDaily') ?>" method="POST">
+            <form action="<?= base_url('task/editDaily') ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="task_id" id="task-id">
                     <!-- <input type="text" name="task_id" id="task-id" disabled> -->
@@ -335,8 +331,14 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" id="status" name="status" required>
+                            <option value="">Select Status</option>
                             <option value="Resolved">Resolved</option>
+                            <option value="Outstanding">Outstanding</option>
                         </select>
+                    </div>
+                    <div class="form-group" id="resolved-fields" style="display: none;">
+                        <label>Upload File</label>
+                        <input type="file" class="form-control" name="file_name" id="file_name">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -509,6 +511,18 @@
         } else {
             // Sembunyikan input jika bukan 'Troubleshooting'
             document.getElementById('troubleshooting-fields').style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('status').addEventListener('change', function() {
+        var category = this.value;
+
+        if (category === 'Resolved') {
+            document.getElementById('resolved-fields').style.display = 'block';
+        } else {
+            document.getElementById('resolved-fields').style.display = 'none';
         }
     });
 </script>

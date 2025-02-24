@@ -46,19 +46,20 @@ class Task extends CI_Controller {
         $config['max_size'] = 10240; // 10MB
         $this->load->library('upload', $config);
     
-        if (!empty($_FILES['file_name']['name'])) {
-            if (!$this->upload->do_upload('file_name')) {
-                $this->session->set_flashdata('error', $this->upload->display_errors());
-                redirect('daily-task');
-                return;
-            } else {
-                $uploadData = $this->upload->data();
-                $filePath = 'uploads/' . $uploadData['file_name'];
-            }
-        } else {
-            $filePath = null;
-        }
-    
+        // if (!empty($_FILES['file_name']['name'])) {
+        //     if (!$this->upload->do_upload('file_name')) {
+        //         $this->session->set_flashdata('error', $this->upload->display_errors());
+        //         redirect('daily-task');
+        //         return;
+        //     } else {
+        //         $uploadData = $this->upload->data();
+        //         $filePath = 'uploads/' . $uploadData['file_name'];
+        //     }
+        // } else {
+        //     $filePath = null;
+        // }
+        $filePath = '-';
+
         $data = array(
             'name_task' => $this->input->post('name_task'),
             // 'owner_task' => $this->input->post('username'),
@@ -68,11 +69,12 @@ class Task extends CI_Controller {
             'category_task' => $this->input->post('category_task'),
             'system_category' => $this->input->post('system_category'),
             'priority_task' => 'Daily',
-            'status_task' => $this->input->post('status_task'),
-            'startdate_task' => $this->input->post('startdate_task'),
-            'enddate_task' => $this->input->post('startdate_task'),
-            'starttime_task' => $this->input->post('starttime_task'),
-            'endtime_task' => $this->input->post('endtime_task'),
+            // 'status_task' => $this->input->post('status_task'),
+            'status_task' => 'Outstanding',
+            'startdate_task' => $datenow->format('Y-m-d H:i:s'),
+            'enddate_task' => '0001-01-01 00:00:00',
+            'starttime_task' => $datenow->format('H:i:s'),
+            'endtime_task' => '00:00:00',
             'report_task' => $this->input->post('report_task'),
             'outstanding_task' => $this->input->post('outstanding_task'),
             'file_name' => $filePath,
@@ -92,15 +94,34 @@ class Task extends CI_Controller {
     
     public function editDaily() {
         date_default_timezone_set('Asia/Jakarta');
+        $datenow = new \DateTime();
         $task_id = $this->input->post('task_id');
         $last_report = $this->input->post('last_report');
         $status = $this->input->post('status');
         $today = date('Y-m-d H:i:s');
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = '*';
+        $config['max_size'] = 10240; // 10MB
+        $this->load->library('upload', $config);
         
+        
+        if (!$this->upload->do_upload('file_name')) {
+            // $this->session->set_flashdata('error', $this->upload->display_errors());
+            // redirect('daily-task');
+            // return;
+            $filePath = '-';
+        } else {
+            $uploadData = $this->upload->data();
+            $filePath = 'uploads/' . $uploadData['file_name'];
+        }
+
         $update_data = [
             'resolve_outstanding_date' => $today,
             'resolve_outstanding' => $last_report,
-            'status_task' => $status
+            'status_task' => $status,
+            'file_name' => $filePath,
+            'enddate_task' => $datenow->format('Y-m-d'),
+            'endtime_task' => $datenow->format('H:i:s'),
         ];
 
         $result = $this->M_task->update_task($task_id, $update_data);
