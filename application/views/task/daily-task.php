@@ -32,7 +32,7 @@
             </select>
         </div>
     </div>
-        <!-- Dropdown Filter for Status -->
+        <!-- Dropdown Filter for Date -->
     <div class="row mb-4">
         <div class="col-md-3">Choose Date :
             <input type="date" id="dateFilter" class="form-control">
@@ -584,18 +584,18 @@
 
         $('#nameFilter').on('change', function() {
             var selectedStatus = $(this).val();
-            table.column(2).search(selectedStatus).draw();  // Column 3 is 'Status'
+            table.column(2).search(selectedStatus).draw();
         });
 
         $('#statusFilter').on('change', function() {
             var selectedStatus = $(this).val();
-            table.column(7).search(selectedStatus).draw();  // Column 3 is 'Status'
+            table.column(7).search(selectedStatus).draw();
         });
 
         $('#dateFilter').on('change', function() {
-            var selectedDate = $(this).val();  // Mendapatkan tanggal yang dipilih
-            console.log('Tanggal yang dipilih: ' + selectedDate);  // Tampilkan di konsol
-            table.column(1).search(selectedDate).draw();  // Terapkan filter berdasarkan tanggal
+            var selectedDate = $(this).val();
+            console.log('Tanggal yang dipilih: ' + selectedDate);
+            table.column(1).search(selectedDate).draw();
         });
     });
 
@@ -603,7 +603,6 @@
     $('.edit-btn').on('click', function() {
         var taskId = $(this).data('id');
 
-        // Memasukkan nilai task_id ke dalam elemen input dengan id task-id di modal
         $('#task-id').val(taskId);
     });
 });
