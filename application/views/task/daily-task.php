@@ -32,6 +32,12 @@
             </select>
         </div>
     </div>
+        <!-- Dropdown Filter for Status -->
+    <div class="row mb-4">
+        <div class="col-md-3">Choose Date :
+            <input type="date" id="dateFilter" class="form-control">
+        </div>
+    </div>
 <?php endif; ?>
 
     <!-- Page Heading -->
@@ -585,12 +591,16 @@
             var selectedStatus = $(this).val();
             table.column(7).search(selectedStatus).draw();  // Column 3 is 'Status'
         });
+
+        $('#dateFilter').on('change', function() {
+            var selectedDate = $(this).val();  // Mendapatkan tanggal yang dipilih
+            console.log('Tanggal yang dipilih: ' + selectedDate);  // Tampilkan di konsol
+            table.column(1).search(selectedDate).draw();  // Terapkan filter berdasarkan tanggal
+        });
     });
 
     $(document).ready(function() {
-    // Menangkap event ketika tombol Update diklik
     $('.edit-btn').on('click', function() {
-        // Mendapatkan nilai task_id dari data-id tombol
         var taskId = $(this).data('id');
 
         // Memasukkan nilai task_id ke dalam elemen input dengan id task-id di modal
@@ -598,6 +608,13 @@
     });
 });
 
+</script>
+<script>
+    // $('#dateFilter').on('change', function() {
+    //     var selectedDate = $(this).val();  // Mendapatkan tanggal yang dipilih
+    //     console.log('Tanggal yang dipilih: ' + selectedDate);  // Tampilkan di konsol
+    //     table.column(1).search(selectedDate).draw();  // Terapkan filter berdasarkan tanggal
+    // });
 </script>
 </body>
 </html>
