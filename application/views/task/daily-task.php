@@ -123,6 +123,7 @@
                                             data-outstanding-task="<?= $row->outstanding_task; ?>"
                                             data-file-name="<?= $row->file_name; ?>"
                                             data-last-update="<?= $row->created_at; ?>"
+                                            data-resolve-outstanding="<?= $row->resolve_outstanding; ?>"
                                             >
                                         <!-- <i class="fas fa-file"></i>  -->
                                         Detail
@@ -184,6 +185,7 @@
                                 <label>Kategori Job</label>
                                 <select class="form-control" name="category_task" id="category_task" required>
                                     <option value="">Select Category</option>
+                                    <option value="Training">Training</option>
                                     <option value="Troubleshooting">Troubleshooting</option>
                                     <option value="Research">Research</option>
                                     <option value="Coding">Coding</option>
@@ -440,12 +442,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Kendala Troubleshooting</label>
-                                <textarea type="text" class="form-control" name="reason_task" id="edit_reason_task" rows="4" disabled></textarea>
+                                <label>Outstanding</label>
+                                <textarea type="text" class="form-control" name="outstanding_task" id="edit_outstanding_task" rows="4" disabled></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kendala Troubleshooting</label>
+                                <textarea type="text" class="form-control" name="reason_task" id="edit_reason_task" rows="4" disabled></textarea>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Penyebab Troubleshooting</label>
@@ -453,10 +461,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Update</label>
+                                <textarea type="text" class="form-control" name="resolve_outstanding" id="edit_resolve_outstanding" rows="4" disabled></textarea>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <br>
+                            <br>
+                            <br>
+
+                            <a href="#" class="btn btn-sm btn-danger" id="openFileLink" target="_blank">
+                                <i class="fas fa-file"></i> OpenFile
+                            </a>
+                        </div> -->
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="submit" class="btn btn-primary">Update</button> -->
                 </div>
             </form>
         </div>
@@ -569,13 +593,29 @@
             document.getElementById('edit_reason_task').value = this.getAttribute('data-reason-task');
             document.getElementById('edit_constraint_task').value = this.getAttribute('data-constraint-task');
             document.getElementById('edit_report_task').value = this.getAttribute('data-report-task');
-            // document.getElementById('edit_outstanding_task').value = this.getAttribute('data-outstanding-task');
-            // document.getElementById('edit_filename').value = this.getAttribute('data-file-name');
+            document.getElementById('edit_outstanding_task').value = this.getAttribute('data-outstanding-task');
+            document.getElementById('edit_resolve_outstanding').value = this.getAttribute('data-resolve-outstanding');
             // document.getElementById('edit_last-update').value = this.getAttribute('data-last-update');
         });
     });
 
+    // Assume you have a table of tasks, and each task has a 'data-file' attribute for the file name.
+    $(document).ready(function() {
+        // When a task row is clicked, open the modal and set the file link dynamically.
+        $(".task-row").click(function() {
+            var taskId = $(this).data("id");
+            var fileName = $(this).data("file");  // Get the file name from the data attribute
 
+            // Set the file name to the modal's file link
+            $("#edit_id").val(taskId);  // Set task ID in the hidden field (if needed)
+            $("#openFileLink").attr("href", "<?= base_url(); ?>" + fileName);  // Update the file link
+
+            // Optionally, you can load other data into the modal as well
+            $("#edit_owner_task").val($(this).data("owner"));
+            $("#edit_name_task").val($(this).data("name"));
+            // Add other fields as needed
+        });
+    });
 
 
     // Delete Button Handler
