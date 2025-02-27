@@ -343,7 +343,7 @@
                     </div>
                     <div class="form-group" id="resolved-fields" style="display: none;">
                         <label>Upload File</label>
-                        <input type="file" class="form-control" name="file_name" id="file_name">
+                        <input type="file" class="form-control" name="file_name" id="file_name" required>
                     </div>
                 </div>
                 <div class="modal-footer">
