@@ -104,16 +104,18 @@ class Task extends CI_Controller {
         $config['max_size'] = 10240; // 10MB
         $this->load->library('upload', $config);
         
-        
-        if (!$this->upload->do_upload('file_name')) {
-            $this->session->set_flashdata('error', $this->upload->display_errors());
-            redirect('daily-task');
-            return;
-            // $filePath = '-';
-        } else {
-            $uploadData = $this->upload->data();
-            $filePath = 'uploads/' . $uploadData['file_name'];
+        if ($this->input->post('status') == 'Resolved') {
+            if (!$this->upload->do_upload('file_name')) {
+                $this->session->set_flashdata('error', $this->upload->display_errors());
+                redirect('daily-task');
+                return;
+                // $filePath = '-';
+            } else {
+                $uploadData = $this->upload->data();
+                $filePath = 'uploads/' . $uploadData['file_name'];
+            }
         }
+
 
         $update_data = [
             'resolve_outstanding_date' => $today,
