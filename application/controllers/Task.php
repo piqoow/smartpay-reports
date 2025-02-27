@@ -106,10 +106,10 @@ class Task extends CI_Controller {
         
         
         if (!$this->upload->do_upload('file_name')) {
-            // $this->session->set_flashdata('error', $this->upload->display_errors());
-            // redirect('daily-task');
-            // return;
-            $filePath = '-';
+            $this->session->set_flashdata('error', $this->upload->display_errors());
+            redirect('daily-task');
+            return;
+            // $filePath = '-';
         } else {
             $uploadData = $this->upload->data();
             $filePath = 'uploads/' . $uploadData['file_name'];
