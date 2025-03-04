@@ -131,14 +131,17 @@
                             <th style="text-align: center;">Nomor PO</th>
                             <th style="text-align: center;">Tanggal Request</th>
                             <th style="text-align: center;">Request Dana</th>
+                            <th style="text-align: center;">Transfer Finance</th>
+                            <th style="text-align: center;">Difference</th>
                             <th style="text-align: center;">Nomor Rekening Tujuan</th>
                             <th style="text-align: center;">Jenis Request</th>
-                            <th style="text-align: center;">Keterangan</th>
+                            <!-- <th style="text-align: center;">Keterangan</th> -->
                             <th style="text-align: center;">Bukti Nota</th>
-                            <th style="text-align: center;">Status</th>
+                            <!-- <th style="text-align: center;">Status</th> -->
                             <th style="text-align: center;">Bukti Transfer</th>
                             <th style="text-align: center;">Tanggal Transfer</th>
                             <th style="text-align: center;">Action</th>
+                            <!-- <th style="text-align: center;">Details</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -168,23 +171,31 @@
                             <td><?= $row['location_name']; ?></td>
                             <td><?= $row['po_number']; ?></td>
                             <td><?= $row['request_date']; ?></td>
-                            <td><?= $row['request_dana']; ?></td>
+                            <td><?= number_format($row['request_dana'], 0, ',', '.'); ?></td>
+                            <td><?= number_format($row['nominal_finance'], 0, ',', '.'); ?></td>
+                            <td><?= number_format($row['difference'], 0, ',', '.'); ?></td>
                             <td><?= $row['rekening_tujuan']; ?></td>
                             <td><?= $row['category_request']; ?></td>
-                            <td><?= $row['category_detail']; ?></td>
-                            <td>
+                            <!-- <td><?= $row['category_detail']; ?></td> -->
+                            <td style="text-align: center;">
                                 <?php if (!empty($row['bukti_nota'])): ?>
                                     <a href="<?= base_url($row['bukti_nota']); ?>" target="_blank" class="btn btn-primary">View</a>
                                 <?php else: ?>
                                     -
                                 <?php endif; ?>
                             </td>
-                            <td><?= $row['status']; ?></td>
-                            <td>
+                            <!-- <td><?= $row['status']; ?></td> -->
+                            <td style="text-align: center;">
                                 <?php if (!empty($row['bukti_transfer'])): ?>
                                     <a href="<?= base_url($row['bukti_transfer']); ?>" target="_blank" class="btn btn-primary">View</a>
                                 <?php else: ?>
                                     -
+                                <?php endif; ?>
+                                <!-- Tanggal -->
+                                <?php if ($row['transfer_date'] == '0000-00-00'): ?>
+                                    -
+                                <?php else: ?>
+                                    <?= $row['transfer_date']; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -195,14 +206,23 @@
                                 <?php endif; ?>
                             </td>	
                             <td style="text-align: center;">
-                                <?php if ($row['status'] != 'Transfered'): ?>
+                                <?php if ($row['status'] == 'Pending' && $row['status_finance'] == 'Pending'): ?>
                                     <!-- Tombol Update hanya aktif jika status bukan 'Transfered' -->
                                     <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $row['id_pc']; ?>" 
                                             data-location-name="<?= $row['location_name']; ?>" 
                                             data-po-number="<?= $row['po_number']; ?>" 
                                             data-request-dana="<?= $row['request_dana']; ?>" 
                                             data-toggle="modal" data-target="#updateTransferModal">
-                                        <i class="fas fa-edit"></i> Update
+                                        <i class="fas fa-edit"></i> Update Transfer
+                                    </button>
+                                <?php elseif ($row['status'] == 'Transfered' && $row['status_finance'] == 'Pending'): ?>
+                                    <!-- Tombol Update hanya aktif jika status bukan 'Transfered' -->
+                                    <button class="btn btn-sm btn-warning edit-btn" data-id="<?= $row['id_pc']; ?>" 
+                                            data-location-name="<?= $row['location_name']; ?>" 
+                                            data-po-number="<?= $row['po_number']; ?>" 
+                                            data-request-dana="<?= $row['request_dana']; ?>" 
+                                            data-toggle="modal" data-target="#updateFinanceTransferModal">
+                                        <i class="fas fa-edit"></i> Update Finance
                                     </button>
                                 <?php else: ?>
                                     <!-- Jika status 'Transfered', tombol akan dinonaktifkan -->
@@ -285,6 +305,41 @@
     </div>
 </div>
 
+<!-- Modal Update Bukti Transfer Pemasukan-->
+<div class="modal fade" id="updateFinanceTransferModal" tabindex="-1" role="dialog" aria-labelledby="updateFinanceTransferModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateFinanceTransferModalLabel">Update Bukti Transfer Finance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateTransferForm" method="post" action="<?= base_url('administration/updateTransferFinance'); ?>" enctype="multipart/form-data">
+                    <input type="hidden" name="id_pc" id="id_pc">
+                    <div class="form-group">
+                        <label for="finance_date">Tanggal Transfer Finance</label>
+                        <input type="date" class="form-control" id="finance_date" name="finance_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nominal_finance">Nominal Transfer Finance</label>
+                        <input type="number" class="form-control" id="nominal_finance" name="nominal_finance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bukti_finance">Upload Bukti Transfer Finance</label>
+                        <input type="file" class="form-control" id="bukti_finance" name="bukti_finance" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function () {
@@ -350,6 +405,17 @@
 
 <script>
     document.getElementById('bukti_transfer').addEventListener('change', function(event) {
+        if (event.target.files.length > 0) {
+            var fileName = event.target.files[0].name;
+            console.log('File selected: ' + fileName);
+        } else {
+            console.log('No file selected');
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('bukti_finance').addEventListener('change', function(event) {
         if (event.target.files.length > 0) {
             var fileName = event.target.files[0].name;
             console.log('File selected: ' + fileName);

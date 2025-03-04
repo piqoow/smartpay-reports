@@ -86,6 +86,7 @@ class Administration extends CI_Controller {
             'category_detail' => $this->input->post('kategori_detail'),
             'bukti_nota' => $filePath,
             'status' => 'Pending',
+            'status_finance' => 'Pending',
         ];
     
         if ($this->M_administration->addPettyCash($data)) {
@@ -125,6 +126,47 @@ class Administration extends CI_Controller {
     
         if ($this->M_administration->updateTransfer($id_pc, $data)) {
             $this->session->set_flashdata('success', 'Bukti transfer updated successfully');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to update bukti transfer');
+            log_message('error', 'Database update failed: ' . $this->db->last_query());
+        }
+        // var_dump($id_pc);
+        // var_dump($this->input->post('transfer_date'));
+        // var_dump($filePath);
+        // exit; // Untuk menghentikan eksekusi dan melihat hasilnya
+            
+        redirect('petty-cash');
+    }
+
+    public function updateTransferFinance() {
+        $this->load->library('upload');
+    
+        $config['upload_path'] = './bukti-finance/';
+        $config['allowed_types'] = '*';
+        $config['max_size'] = 10240; // 10MB
+        $this->load->library('upload', $config);
+    
+        $this->upload->initialize($config);
+    
+        if ($this->upload->do_upload('bukti_finance')) {
+            $uploadData = $this->upload->data();
+            $filePath = 'bukti-finance/' . $uploadData['file_name'];
+        } else {
+            $filePath = null;
+            $this->session->set_flashdata('error', $this->upload->display_errors());
+            log_message('error', 'Upload error: ' . $this->upload->display_errors());
+        }        
+    
+        $id_pc = $this->input->post('id_pc');
+        $data = [
+            'status_finance' => 'Transfered',
+            'nominal_finance' => $this->input->post('nominal_finance'),
+            'bukti_finance' => $filePath,
+            'finance_date' => $this->input->post('finance_date'),
+        ];
+    
+        if ($this->M_administration->updateTransferFinance($id_pc, $data)) {
+            $this->session->set_flashdata('success', 'Bukti Finance updated successfully');
         } else {
             $this->session->set_flashdata('error', 'Failed to update bukti transfer');
             log_message('error', 'Database update failed: ' . $this->db->last_query());

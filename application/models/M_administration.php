@@ -24,15 +24,40 @@ class M_administration extends CI_Model {
     }
 // ======================================= PETTY CASH =======================================  
     public function getAllPettyCash() {
-        $query = $this->db->get('petty_cash');
+        $query = $this->db->query('SELECT 
+        id_pc,
+        location_name, 
+        po_number,
+        request_date,
+        request_dana,
+        nominal_finance,
+        (request_dana - nominal_finance) AS difference,
+        rekening_tujuan,
+        category_request,
+        category_detail,
+        bukti_nota,
+        status,
+        bukti_transfer,
+        transfer_date,
+        created_at,
+        status_finance,
+        bukti_finance,
+        finance_date
+        FROM petty_cash');
         return $query->result_array();
     }
+
 
     public function addPettyCash($data) {
         return $this->db->insert('petty_cash', $data);
     }
 
     public function updateTransfer($id_pc, $data) {
+        $this->db->where('id_pc', $id_pc);
+        return $this->db->update('petty_cash', $data);
+    }
+
+    public function updateTransferFinance($id_pc, $data) {
         $this->db->where('id_pc', $id_pc);
         return $this->db->update('petty_cash', $data);
     }
