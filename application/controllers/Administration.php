@@ -139,45 +139,59 @@ class Administration extends CI_Controller {
     }
 
     public function updateTransferFinance() {
+        // Load library upload
         $this->load->library('upload');
     
+        // Konfigurasi upload file
         $config['upload_path'] = './bukti-finance/';
-        $config['allowed_types'] = '*';
-        $config['max_size'] = 10240; // 10MB
-        $this->load->library('upload', $config);
-    
+        $config['allowed_types'] = '*'; // Anda bisa menambahkan filter jenis file misalnya jpg, png, pdf
+        $config['max_size'] = 10240; // Maksimal 10MB
         $this->upload->initialize($config);
     
+        // Cek apakah file berhasil di-upload
         if ($this->upload->do_upload('bukti_finance')) {
             $uploadData = $this->upload->data();
-            $filePath = 'bukti-finance/' . $uploadData['file_name'];
+            $filePath = 'bukti-finance/' . $uploadData['file_name'];  // Path file yang berhasil di-upload
         } else {
+            // Jika file gagal di-upload, set filePath ke null dan tampilkan pesan error
             $filePath = null;
             $this->session->set_flashdata('error', $this->upload->display_errors());
             log_message('error', 'Upload error: ' . $this->upload->display_errors());
-        }        
+        }
     
-        $id_pc = $this->input->post('id_pc');
+        // Ambil data dari form
+        $id_pc = $this->input->post('id_pc_finance');
+        $nominal_finance = $this->input->post('nominal_finance');
+        $finance_date = $this->input->post('finance_date');
+    
+        // Cek jika id_pc tidak ada atau tidak valid
+        if (empty($id_pc)) {
+            $this->session->set_flashdata('error', 'ID PC tidak ditemukan.');
+            log_message('error', 'ID PC tidak ditemukan.');
+            redirect('petty-cash');
+        }
+    
+        // Data yang akan di-update
         $data = [
             'status_finance' => 'Transfered',
-            'nominal_finance' => $this->input->post('nominal_finance'),
-            'bukti_finance' => $filePath,
-            'finance_date' => $this->input->post('finance_date'),
+            'nominal_finance' => $nominal_finance,
+            'finance_date' => $finance_date,
+            'bukti_finance' => $filePath,  // Hanya diset jika ada file yang di-upload
         ];
     
-        if ($this->M_administration->updateTransferFinance($id_pc, $data)) {
-            $this->session->set_flashdata('success', 'Bukti Finance updated successfully');
+        // Panggil model untuk update data
+        if ($this->M_administration->updateTransfer($id_pc, $data)) {
+            $this->session->set_flashdata('success', 'Bukti Transfer Finance berhasil diperbarui.');
+            log_message('debug', 'Update berhasil untuk ID PC: ' . $id_pc);
         } else {
-            $this->session->set_flashdata('error', 'Failed to update bukti transfer');
-            log_message('error', 'Database update failed: ' . $this->db->last_query());
+            $this->session->set_flashdata('error', 'Gagal memperbarui bukti transfer.');
+            log_message('error', 'Gagal memperbarui bukti transfer untuk ID PC: ' . $id_pc);
         }
-        // var_dump($id_pc);
-        // var_dump($this->input->post('transfer_date'));
-        // var_dump($filePath);
-        // exit; // Untuk menghentikan eksekusi dan melihat hasilnya
-            
+    
+        // Redirect ke halaman yang sesuai setelah proses
         redirect('petty-cash');
     }
+    
     
 
     public function editPettyCash() {
