@@ -316,7 +316,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="updateTransferForm" method="post" action="<?= base_url('administration/updateTransferFinance'); ?>" enctype="multipart/form-data">
+                <form id="updateTransferFinanceForm" method="post" action="<?= base_url('administration/updateTransferFinance'); ?>" enctype="multipart/form-data">
                     <input type="hidden" name="id_pc" id="id_pc">
                     <div class="form-group">
                         <label for="finance_date">Tanggal Transfer Finance</label>
