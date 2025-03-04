@@ -43,7 +43,7 @@ class M_administration extends CI_Model {
         status_finance,
         bukti_finance,
         finance_date
-        FROM petty_cash');
+        FROM petty_cash ORDER BY status, status_finance ASC');
         return $query->result_array();
     }
 
