@@ -195,6 +195,7 @@
                                     <option value="Installation">Installation</option>
                                     <option value="Assembling">Assembling</option>
                                     <option value="Quality Control">Quality Control</option>
+                                    <option value="Survey">Survey</option>
                                 </select>
                             </div>
                         </div>
