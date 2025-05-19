@@ -41,6 +41,13 @@
                     <span>Daily Task</span>
                 </a>
             </li>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Stock Manage</span>
+                </a>
+            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -78,6 +85,13 @@
                     <span>Daily Task</span>
                 </a>
             </li>
+<!-- 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Stock Manage</span>
+                </a>
+            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -119,6 +133,13 @@
                 </a>
             </li>
 
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Stock Manage</span>
+                </a>
+            </li> -->
+
             <hr class="sidebar-divider my-0">
             <!-- Heading -->
             <!-- <div class="sidebar-heading">
@@ -154,6 +175,13 @@
                     <span>Daily Task</span>
                 </a>
             </li>
+<!-- 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Stock Manage</span>
+                </a>
+            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 

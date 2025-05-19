@@ -377,46 +377,52 @@
                                 <input type="text" class="form-control" name="owner_task" id="edit_owner_task" disabled>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Job Name</label>
                                 <input type="text" class="form-control" name="name_task" id="edit_name_task" disabled>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">                        
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Location Name</label>
                                 <input type="text" class="form-control" name="location_name" id="edit_location_name" disabled>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Category Task</label>
                                 <input type="text" class="form-control" name="category_task" id="edit_category_task" disabled>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>System Name</label>
                                 <input type="text" class="form-control" name="system_category" id="edit_system_category" disabled>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Status Task</label>
                                 <input type="text" class="form-control" name="status_task" id="edit_status_task" disabled>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Date</label>
+                                <label>Start Date</label>
                                 <input type="text" class="form-control" name="startdate_task" id="edit_startdate_task" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" class="form-control" name="enddate_task" id="edit_enddate_task" disabled>
                             </div>
                         </div>
                     </div>
@@ -590,7 +596,7 @@
             document.getElementById('edit_startdate_task').value = this.getAttribute('data-startdate-task');
             document.getElementById('edit_starttime_task').value = this.getAttribute('data-starttime-task');
             document.getElementById('edit_endtime_task').value = this.getAttribute('data-endtime-task');
-            // document.getElementById('edit_enddate_task').value = this.getAttribute('data-enddate-task');
+            document.getElementById('edit_enddate_task').value = this.getAttribute('data-enddate-task');
             document.getElementById('edit_reason_task').value = this.getAttribute('data-reason-task');
             document.getElementById('edit_constraint_task').value = this.getAttribute('data-constraint-task');
             document.getElementById('edit_report_task').value = this.getAttribute('data-report-task');
