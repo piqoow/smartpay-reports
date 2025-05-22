@@ -100,7 +100,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('iot/add'); ?>" method="post">
+            <form action="<?= base_url('iot-server/add'); ?>" method="post">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
