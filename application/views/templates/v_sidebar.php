@@ -62,6 +62,13 @@
                     <span>IOT Server</span>
                 </a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span >EV Server/Client</span>
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
@@ -151,6 +158,13 @@
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>IOT Server</span>
                 </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span >EV Server/Client</span>
+                </a>
             </li> -->
 
             <!-- <li class="nav-item">
@@ -194,6 +208,13 @@
                 <a class="nav-link" href="<?= base_url('iot-server'); ?>">
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>IOT Server</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span >EV Server/Client</span>
                 </a>
             </li>
 
