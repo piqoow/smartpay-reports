@@ -65,19 +65,25 @@ $route['dashboard-task'] = 'task/indexDashboard';
 
 //IOT
 $route['iot-server'] = 'IOT/indexServer';
+$route['iot-server/add'] = 'IOT/addServer';
 $route['iot-server/edit-server/(:num)'] = 'IOT/editServer/$1';
 
-$route['iot-pgs'] = 'iot/indexPGS';
-$route['iot-pgs'] = 'iot/editPGS';
+// $route['iot-pgs'] = 'iot/indexPGS';
+// $route['iot-pgs/add'] = 'iot/addPGS';
+// $route['iot-pgs'] = 'iot/editPGS';
 
-$route['iot-dds'] = 'iot/indexDDS';
-$route['iot-dds'] = 'iot/indexDDS';
+// $route['iot-dds'] = 'iot/indexDDS';
+// $route['iot-dds'] = 'iot/editDDS';
 
-$route['iot-tds'] = 'iot/indexTDS';
-$route['iot-tds'] = 'iot/indexTDS';
+// $route['iot-tds'] = 'iot/indexTDS';
+// $route['iot-tds'] = 'iot/editTDS';
 
-$route['iot-eb'] = 'iot/indexEB';
-$route['iot-eb'] = 'iot/indexEB';
+// $route['iot-eb'] = 'iot/indexEB';
+// $route['iot-eb'] = 'iot/editEB';
+
+$route['iot-ev'] = 'IOT/indexEV';
+$route['iot-ev/add'] = 'IOT/addEV';
+// $route['iot-ev'] = 'IOT/editEV';
 
 // $route['iot'] = 'iot/index';
 // $route['iot'] = 'iot/index';
@@ -85,11 +91,13 @@ $route['iot-eb'] = 'iot/indexEB';
 
 
 //Administration
+// $route['new-petty-cash'] = 'Administration/indexNewPettyCash';
 $route['petty-cash'] = 'Administration/indexPettyCash';
 $route['petty-cash/addPettyCash'] = 'Administration/addPettyCash';
 $route['petty-cash/rejectPettyCash'] = 'Administration/rejectPettyCash';
 // $route['administration/updateTransfer'] = 'Administration/updateTransfer';
 
+// $route['stock-manage'] = 'Assetmanagement/indexStockManage';
 
 //auth
 $route['login'] = 'auth/index';
