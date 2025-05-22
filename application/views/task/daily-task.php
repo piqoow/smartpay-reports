@@ -34,8 +34,13 @@
     </div>
         <!-- Dropdown Filter for Date -->
     <div class="row mb-4">
-        <div class="col-md-3">Choose Date :
-            <input type="date" id="dateFilter" class="form-control">
+        <div class="col-md-3">
+            <label for="start_date" class="form-label">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label for="end_date" class="form-label">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control">
         </div>
     </div>
 <?php endif; ?>
@@ -257,6 +262,15 @@
                             <div class="form-group">
                                 <label>Outstanding</label>
                                 <input type="text" class="form-control" name="outstanding_task" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Revisi Task</label>
+                                <select class="form-control" name="revisi_task" id="revisi_task" required>
+                                    <option value="TIDAK">Tidak</option>
+                                    <option value="YA">Ya</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -644,6 +658,33 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
+        });
+        
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+                var issueDate = data[1]; // Column index of issue_date
+
+                if (startDate) {
+                    startDate = new Date(startDate);
+                }
+                if (endDate) {
+                    endDate = new Date(endDate);
+                }
+
+                var date = new Date(issueDate);
+
+                if ((!startDate || date >= startDate) && (!endDate || date <= endDate)) {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        // Redraw table on date change
+        $('#start_date, #end_date').on('change', function() {
+            table.draw();
         });
 
         $('#nameFilter').on('change', function() {

@@ -60,20 +60,27 @@ class Task extends CI_Controller {
         // }
         $filePath = '-';
 
+        // Cek apakah task direvisi
+        if ($this->input->post('revisi_task') == 'YA') {
+            $startdate = (clone $datenow)->modify('-1 day')->format('Y-m-d H:i:s');
+            $starttime = '00:00:00';
+        } else {
+            $startdate = $datenow->format('Y-m-d H:i:s');
+            $starttime = $datenow->format('H:i:s');
+        }
+
         $data = array(
             'name_task' => $this->input->post('name_task'),
-            // 'owner_task' => $this->input->post('username'),
             'owner_task' => $this->session->userdata('username'),
             'user_teams' => $this->session->userdata('user_teams'),
             'location_name' => $this->input->post('location_name'),
             'category_task' => $this->input->post('category_task'),
             'system_category' => $this->input->post('system_category'),
             'priority_task' => 'Daily',
-            // 'status_task' => $this->input->post('status_task'),
             'status_task' => 'Outstanding',
-            'startdate_task' => $datenow->format('Y-m-d H:i:s'),
+            'startdate_task' => $startdate,
+            'starttime_task' => $starttime,
             'enddate_task' => '0001-01-01 00:00:00',
-            'starttime_task' => $datenow->format('H:i:s'),
             'endtime_task' => '00:00:00',
             'report_task' => $this->input->post('report_task'),
             'outstanding_task' => $this->input->post('outstanding_task'),
