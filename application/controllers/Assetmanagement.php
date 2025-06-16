@@ -233,5 +233,20 @@ class Assetmanagement extends CI_Controller {
 
         redirect('stockies');
     }
+
+    public function addAssetCategory() {
+    
+            $data = [
+                'nama_barang' => $this->input->post('nama_barang')
+            ];
+    
+            if ($this->M_assetmanagement->insertAssetCategory($data)) {
+                $this->session->set_flashdata('success', 'Kategori berhasil ditambahkan');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan Kategori');
+            }
+    
+            redirect('stockies');
+    }
     
 }

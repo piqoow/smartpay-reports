@@ -32,6 +32,10 @@ class M_assetmanagement extends CI_Model {
         return $this->db->insert('asset_stock', $data);
     }
 
+    public function insertAssetCategory($data)
+    {
+        return $this->db->insert('asset_category', $data);
+    }
 
     public function getAllStockAsset() {
         $query = $this->db->query('SELECT 
