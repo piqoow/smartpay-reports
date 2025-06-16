@@ -201,6 +201,7 @@
                                     <option value="Assembling">Assembling</option>
                                     <option value="Quality Control">Quality Control</option>
                                     <option value="Survey">Survey</option>
+                                    <option value="Coordination">Coordination</option>
                                 </select>
                             </div>
                         </div>
