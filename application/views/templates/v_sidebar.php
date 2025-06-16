@@ -76,6 +76,13 @@
                     <span>Request Pettycash</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stockies'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Stockies</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 

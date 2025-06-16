@@ -97,7 +97,7 @@ $route['petty-cash/addPettyCash'] = 'Administration/addPettyCash';
 $route['petty-cash/rejectPettyCash'] = 'Administration/rejectPettyCash';
 // $route['administration/updateTransfer'] = 'Administration/updateTransfer';
 
-// $route['stock-manage'] = 'Assetmanagement/indexStockManage';
+$route['stockies'] = 'Assetmanagement/indexStockies';
 
 //auth
 $route['login'] = 'auth/index';
