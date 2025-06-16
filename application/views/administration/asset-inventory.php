@@ -432,7 +432,7 @@
                                         <button type="button" class="btn btn-warning btn-update-outgoing" 
                                                 data-toggle="modal" 
                                                 data-target="#updateAssetOutgoingModal" 
-                                                data-id="<?= $row['id_out']; ?>">
+                                                data-id="<?= $row['id_out']; ?>" disabled>
                                             Update<?= $row['id_out']; ?>
                                         </button>
                                     <?php endif; ?>
