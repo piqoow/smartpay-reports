@@ -127,6 +127,13 @@
                     <span>Request Pettycash</span>
                 </a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stockies'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Stockies</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -147,6 +154,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stockies'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Stockies</span>
+                </a>
+            </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
                     <i class="fas fa-fw fa-microchip"></i>
@@ -225,6 +238,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('stockies'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Stockies</span>
+                </a>
+            </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
