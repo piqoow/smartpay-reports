@@ -47,6 +47,7 @@ class M_assetmanagement extends CI_Model {
         jumlah_keluar,
         jumlah_pinjam,
         jumlah_pinjam+jumlah as total,
+        jumlah_keluar+jumlah_pinjam+jumlah as totalasset,
         created_at
         FROM asset_stock');
         return $query->result_array();

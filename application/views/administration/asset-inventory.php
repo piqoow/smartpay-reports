@@ -208,6 +208,7 @@
                             <th style="text-align: center;">Jumlah Pinjam</th>
                             <th style="text-align: center;">Inhouse Stock</th>
                             <th style="text-align: center;">Total Stock</th>
+                            <th style="text-align: center;">Total Asset</th>
                             <th style="text-align: center;">Tanggal Update</th>
                             <!-- <th style="text-align: center;">Action</th> -->
                         </tr>
@@ -242,6 +243,7 @@
                             <td style="text-align: center;"><?= $row['jumlah_pinjam']; ?></td>
                             <td style="text-align: center;"><?= $row['jumlah']; ?></td>
                             <td style="text-align: center;"><?= $row['total']; ?></td>
+                            <td style="text-align: center;"><?= $row['totalasset']; ?></td>
                             <td style="text-align: center;">
                                 <?= date('H:i:s', strtotime($row['tanggal_update'])); ?><br>
                                 <?= date('d-m-Y', strtotime($row['tanggal_update'])); ?>
