@@ -206,8 +206,8 @@
                             <th style="text-align: center;">Nama Barang</th>
                             <th style="text-align: center;">Jumlah Keluar</th>
                             <th style="text-align: center;">Jumlah Pinjam</th>
-                            <th style="text-align: center;">Stock</th>
-                            <th style="text-align: center;">Total</th>
+                            <th style="text-align: center;">Inhouse Stock</th>
+                            <th style="text-align: center;">Total Stock</th>
                             <th style="text-align: center;">Tanggal Update</th>
                             <!-- <th style="text-align: center;">Action</th> -->
                         </tr>
