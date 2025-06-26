@@ -41,13 +41,6 @@
                     <span>Daily Task</span>
                 </a>
             </li>
-
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span>Stock Manage</span>
-                </a>
-            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -62,32 +55,11 @@
                     <span>IOT Server</span>
                 </a>
             </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span >EV Server/Client</span>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Request Pettycash</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stockies'); ?>">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Stockies</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('modem'); ?>">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Log Modem</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -106,13 +78,6 @@
                     <span>Daily Task</span>
                 </a>
             </li>
-<!-- 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span>Stock Manage</span>
-                </a>
-            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -132,13 +97,6 @@
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Request Pettycash</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stockies'); ?>">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Stockies</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -161,19 +119,6 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stockies'); ?>">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Stockies</span>
-                </a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span>Stock Manage</span>
-                </a>
-            </li> -->
-
             <hr class="sidebar-divider my-0">
             <!-- Heading -->
             <!-- <div class="sidebar-heading">
@@ -184,13 +129,6 @@
                 <a class="nav-link" href="<?= base_url('iot-server'); ?>">
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>IOT Server</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span >EV Server/Client</span>
                 </a>
             </li> -->
 
@@ -216,13 +154,6 @@
                     <span>Daily Task</span>
                 </a>
             </li>
-<!-- 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stock-manage'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span>Stock Manage</span>
-                </a>
-            </li> -->
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -237,20 +168,7 @@
                     <span>IOT Server</span>
                 </a>
             </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('iot-ev'); ?>">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span >EV Server/Client</span>
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('stockies'); ?>">
-                    <i class="fas fa-fw fa-bars"></i>
-                    <span>Stockies</span>
-                </a>
-            </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('petty-cash'); ?>">
                     <i class="fas fa-fw fa-bars"></i>
@@ -278,23 +196,24 @@
             <hr class="sidebar-divider">
 <?php endif; ?>
             
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManage"
                     aria-expanded="true" aria-controls="collapseManage">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>IOT Manage</span>
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Smartpay System</span>
                 </a>
                 <div id="collapseManage" class="collapse" aria-labelledby="headingManage"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">IOT Data :</h6>
+                        <a class="collapse-item" href="<?= base_url('documentation-iot'); ?>">IoT Documentations<br></a>
                         <a class="collapse-item" href="<?= base_url('iot-pgs'); ?>">PGS<br>(Parking Guidance System)</a>
                         <a class="collapse-item" href="<?= base_url('iot-dds'); ?>">DDS<br>(Dynamic Display Signage)</a>
                         <a class="collapse-item" href="<?= base_url('iot-tds'); ?>">TDS<br>(Traffic Dispatch System)</a>
                         <a class="collapse-item" href="<?= base_url('iot-eb'); ?>">EB<br>(Emergency Button)</a>
                     </div>
                 </div>
-            </li> -->
+            </li>
             
             <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"

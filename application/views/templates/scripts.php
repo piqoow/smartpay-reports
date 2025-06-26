@@ -83,18 +83,129 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#dataTablePetCash').DataTable({
-            "paging": true,
-            "pageLength": 10,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": false,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+// Get the current date
+const today = new Date();
+const day = String(today.getDate()).padStart(2, '0');
+const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+const year = today.getFullYear();
+const formattedDate = `${day}-${month}-${year}`; // Format as DD-MM-YYYY
+$(document).ready(function() {
+    var table = $('#dataTablePetCash').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "dom": 'Bfrtip',  // Menambahkan tombol ke DOM
+        "buttons": [
+            {
+                extend: 'excelHtml5',  // Menambahkan tombol Excel
+                text: 'Export Excel',
+                className: 'btn btn-success',  // Tambahkan kelas tombol bootstrap jika perlu
+                title: `Stock ${formattedDate}`
+            }
+        ]
     });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    var table = $('#dataTableAssetIncoming').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "dom": 'Bfrtip',  // Menambahkan tombol ke DOM
+        "buttons": [
+            {
+                extend: 'excelHtml5',  // Menambahkan tombol Excel
+                text: 'Export Excel',
+                className: 'btn btn-success',  // Tambahkan kelas tombol bootstrap jika perlu
+                title: `History Masuk ${formattedDate}`
+            }
+        ]
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    var table = $('#dataTableAssetOutgoing').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "dom": 'Bfrtip',  // Menambahkan tombol ke DOM
+        "buttons": [
+            {
+                extend: 'excelHtml5',  // Menambahkan tombol Excel
+                text: 'Export Excel',
+                className: 'btn btn-success',  // Tambahkan kelas tombol bootstrap jika perlu
+                title: `History Keluar ${formattedDate}`
+            }
+        ]
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    var table = $('#dataTableMasterModem').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "dom": 'Bfrtip',  // Menambahkan tombol ke DOM
+        "buttons": [
+            {
+                extend: 'excelHtml5',  // Menambahkan tombol Excel
+                text: 'Export Excel',
+                className: 'btn btn-success',  // Tambahkan kelas tombol bootstrap jika perlu
+                title: `Master Modem ${formattedDate}`
+            }
+        ]
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    var table = $('#dataTableHistoryModem').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "dom": 'Bfrtip',  // Menambahkan tombol ke DOM
+        "buttons": [
+            {
+                extend: 'excelHtml5',  // Menambahkan tombol Excel
+                text: 'Export Excel',
+                className: 'btn btn-success',  // Tambahkan kelas tombol bootstrap jika perlu
+                title: `History Modem ${formattedDate}`
+            }
+        ]
+    });
+});
 </script>
 <!-- 
 <script>

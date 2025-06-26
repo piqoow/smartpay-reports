@@ -97,7 +97,15 @@ $route['petty-cash/addPettyCash'] = 'Administration/addPettyCash';
 $route['petty-cash/rejectPettyCash'] = 'Administration/rejectPettyCash';
 // $route['administration/updateTransfer'] = 'Administration/updateTransfer';
 
+// Stockies
 $route['stockies'] = 'Assetmanagement/indexStockies';
+
+// MODEM
+$route['modem'] = 'Administration/indexModemTransaction';
+$route['modem/insertLog'] = 'Administration/insertLog';
+$route['detail-modem'] = 'Administration/DetailModemTransaction';
+$route['detail-modem/(:num)/(:any)'] = 'Administration/DetailModemTransaction/$1/$2';
+$route['detail-modem/updatelog/(:num)/(:any)'] = 'Administration/UpdateModemLog/$1/$2';
 
 //auth
 $route['login'] = 'auth/index';

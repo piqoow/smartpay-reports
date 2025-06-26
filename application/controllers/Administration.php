@@ -9,6 +9,24 @@ class Administration extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->model('M_administration');
+        $this->load->library('email');
+
+        $config = array(
+            
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.mail.yahoo.com',
+            'smtp_port' => 587,
+            // 'smtp_user' => 'cs.ho@centreparkcorp.com',
+            // 'smtp_pass' => 'sqzqhvsrzwyoatoy',
+            'smtp_user' => 'command.center@centreparkcorp.com',
+            'smtp_pass' => 'thsqdtpcwldvqzhz',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+            'smtp_crypto' => 'tls'
+        );
+
+        $this->email->initialize($config);
     }
 
     public function addRekening() {
@@ -34,6 +52,22 @@ class Administration extends CI_Controller {
     
             redirect('petty-cash');
         }
+    }
+
+    public function indexNewPettyCash() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login');
+        }
+        
+        $data['title'] = 'Petty Cash';
+        $data['pettycash'] = $this->M_administration->getAllPettyCash();
+        $data['locations'] = $this->M_administration->get_locations();
+        $data['rekenings'] = $this->M_administration->get_all_rekening();
+        $data['content'] = 'administration/new-petty-cash';
+        $this->load->view('templates/main', $data);
+        $this->load->view('templates/v_footer');
+        $this->load->view('templates/v_header');
+
     }
     
 
@@ -117,14 +151,14 @@ class Administration extends CI_Controller {
             log_message('error', 'Upload error: ' . $this->upload->display_errors());
         }        
     
-        $id_pc = $this->input->post('id_pc');
+        $id_out = $this->input->post('id_out');
         $data = [
             'status' => 'Transfered',
             'bukti_transfer' => $filePath,
             'transfer_date' => $this->input->post('transfer_date'),
         ];
     
-        if ($this->M_administration->updateTransfer($id_pc, $data)) {
+        if ($this->M_administration->updateTransfer($id_out, $data)) {
             $this->session->set_flashdata('success', 'Bukti transfer updated successfully');
         } else {
             $this->session->set_flashdata('error', 'Failed to update bukti transfer');
@@ -235,5 +269,145 @@ class Administration extends CI_Controller {
         }
         redirect('user');
     }
+
+// ===================================== MODEM TRANSACTION =====================================
+
+    public function indexModemTransaction() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login');
+        }
+        
+        $data['title'] = 'Log Modem';
+        $data['datamodem'] = $this->M_administration->getAllDataModem();
+        $data['logmodem'] = $this->M_administration->getAllDataLogModem();
+        $data['content'] = 'administration/index-modem';
+        $this->load->view('templates/main', $data);
+        $this->load->view('templates/v_footer');
+        $this->load->view('templates/v_header');
+
+    }
+
+    
+
+    public function addMasterData() {
+    
+            $data = [
+                'kode_modem' => $this->input->post('kode_modem'),
+                'lokasi' => $this->input->post('lokasi'),
+                'terdaftar' => $this->input->post('terdaftar'),
+                'user_email' => $this->input->post('user_email'),
+                'password' => $this->input->post('password')
+            ];
+    
+            if ($this->M_administration->insertMasterData($data)) {
+                $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan Data');
+            }
+    
+            redirect('modem');
+    }
+
+    public function UpdateModemLog($id, $sn)
+    {
+        $this->load->model('M_administration');
+        $this->load->library('upload');
+
+        $nama = $this->input->post('nama');
+        $tanggal_kembali = $this->input->post('tanggal_kembali');
+        $data = [
+            'user_update_kembali' => $nama,
+            'tanggal_kembali' => $tanggal_kembali
+        ];
+
+        // Handle file upload jika ada
+        if (!empty($_FILES['bukti_kembali']['name'])) {
+            $config['upload_path'] = './bukti-kembali-modem/';
+            $config['allowed_types'] = '*';
+            $config['max_size'] = 20480;
+            $config['file_name'] = $_FILES['bukti_kembali']['name'];
+
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('bukti_kembali')) {
+                $upload_data = $this->upload->data();
+                $data['bukti_kembali'] = $upload_data['file_name'];
+            } else {
+                $this->session->set_flashdata('error', 'Upload gagal: ' . $this->upload->display_errors());
+                redirect('detail-modem/' . $id . '/' . $sn);
+                return;
+            }
+        }
+
+        // Simpan ke database
+        if ($this->M_administration->UpdateModemLog($id, $data)) {
+            $this->session->set_flashdata('success', 'Data berhasil diupdate');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal update data');
+        }
+
+        // Redirect kembali ke halaman detail
+        redirect('detail-modem/' . $id . '/' . $sn);
+    }
+
+    public function DetailModemTransaction($id, $sn) {        
+        $data['title'] = 'Detail Log Modem';
+        $data['datamodem'] = $this->M_administration->getModemBySN($sn);
+        $data['logmodem'] = $this->M_administration->getLogModemByID($id);
+        $this->load->view('administration/detail-modem', $data);
+    }
+
+    public function insertLog()
+    {
+        $this->load->library('upload');
+        $kode_modem = $this->input->post('kode_modem');
+        $lokasi = $this->input->post('lokasi');
+        $tanggal_pinjam = $this->input->post('tanggal_pinjam');
+
+        $data = [
+            'kode_modem' => $kode_modem,
+            'lokasi' => $lokasi,
+            'tanggal_pinjam' => $tanggal_pinjam,
+        ];
+
+        if (!empty($_FILES['bukti_pinjam']['name'])) {
+            $config['upload_path'] = './bukti-pinjam-modem/';
+            $config['allowed_types'] = '*';
+            $config['max_size'] = 20480;
+            $config['file_name'] = $_FILES['bukti_pinjam']['name'];
+
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('bukti_pinjam')) {
+                $this->session->set_flashdata('error', 'Upload gagal: ' . $this->upload->display_errors());
+                redirect('modem');
+                return;
+            } else {
+                $upload_data = $this->upload->data();
+                $data['bukti_pinjam'] = $upload_data['file_name'];
+            }
+        } else {
+            $this->session->set_flashdata('error', 'File bukti pinjam wajib diupload');
+            redirect('modem');
+            return;
+        }
+
+        $insert = $this->M_administration->insertLogModemTransaction($data);
+
+        if ($insert) {
+            $update_status = $this->M_administration->updateModemStatus($kode_modem, 'dipinjam');
+
+            if ($update_status) {
+                $this->session->set_flashdata('success', 'Log modem berhasil ditambahkan dan status diupdate menjadi dipinjam');
+            } else {
+                $this->session->set_flashdata('error', 'Log modem ditambahkan tapi gagal update status modem');
+            }
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menambahkan log modem');
+        }
+
+        redirect('modem');
+    }
+
 
 }

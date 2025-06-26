@@ -18,9 +18,6 @@
         <div class="card-header py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Form Request</h6>
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPetCashModal">
-                    <i class="fas fa-plus"></i> Add Request
-                </button> -->
 
                 <button type="button" class="btn btn-success ml-2" data-toggle="modal" data-target="#addRekeningModal">
                     <i class="fas fa-plus"></i> Tambah Rekening
@@ -30,16 +27,17 @@
         <div class="card-body">
         <form action="<?= base_url('administration/addPettyCash'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Pettycash Code</label>
+                                <input type="text" class="form-control" name="id_petcash" disabled>
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nama Lokasi</label>
                                 <input type="text" class="form-control" name="location_name" required>
-                                <!-- <select class="form-control" name="location_name" id="location_name" required>
-                                    <?php foreach($locations as $location): ?>
-                                        <option value="<?= $location->nama_Lokasi ?>" <?= set_select('nama_Lokasi', $location->nama_Lokasi); ?>><?= $location->nama_Lokasi ?></option>
-                                    <?php endforeach; ?>
-                                </select> -->
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -48,27 +46,6 @@
                                 <input type="text" class="form-control" name="nomor_po" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Nominal Request Dana</label>
-                                <input type="number" class="form-control" name="request_dana" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Rekening Tujuan</label>
-                                <select class="form-control" name="rekening_tujuan" id="rekening_tujuan" required>
-                                    <option value="">Pilih Rekening</option>
-                                    <?php foreach($rekenings as $rekening): ?>
-                                        <option value="<?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?>" <?= set_select('nama_rekening', $rekening['nama_rekening']); ?>><?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Kategori Request</label>
@@ -83,17 +60,40 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="kategori_detail">Keterangan Detail</label>
-                                <!-- <select class="form-control" name="kategori_detail" id="kategori_detail" required>
-                                    <option value="">Select Category</option>
-                                </select>                        -->
-                                <!-- <input type="text" class="form-control" name="kategori_detail" id="kategori_detail" required> -->
-                                <textarea class="form-control" name="kategori_detail" rows="4" required></textarea>
-                            </div>
-                        </div>
                     </div>
+                    <table class="table table-bordered" id="danaRequestTable">
+                        <thead>
+                            <tr>
+                                <th>Nominal Request Dana</th>
+                                <th>Rekening Tujuan</th>
+                                <th>Keterangan Detail</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="number" class="form-control" name="request_dana[]" required>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="rekening_tujuan[]" required>
+                                        <option value="">Pilih Rekening</option>
+                                        <?php foreach($rekenings as $rekening): ?>
+                                            <option value="<?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?>" <?= set_select('nama_rekening', $rekening['nama_rekening']); ?>><?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <textarea class="form-control" name="kategori_detail[]" rows="4" required></textarea>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deleteItemBtn">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary" id="addItemBtn">Add Item</button>
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -135,13 +135,10 @@
                             <th style="text-align: center;">Difference</th>
                             <th style="text-align: center;">Nomor Rekening Tujuan</th>
                             <th style="text-align: center;">Jenis Request</th>
-                            <!-- <th style="text-align: center;">Keterangan</th> -->
                             <th style="text-align: center;">Bukti Nota</th>
-                            <!-- <th style="text-align: center;">Status</th> -->
                             <th style="text-align: center;">Bukti Transfer</th>
                             <th style="text-align: center;">Finance Transfer</th>
                             <th style="text-align: center;">Action</th>
-                            <!-- <th style="text-align: center;">Details</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -176,7 +173,6 @@
                             <td><?= number_format($row['difference'], 0, ',', '.'); ?></td>
                             <td><?= $row['rekening_tujuan']; ?></td>
                             <td><?= $row['category_request']; ?></td>
-                            <!-- <td><?= $row['category_detail']; ?></td> -->
 
                             <!-- NOTA -->
                             <td style="text-align: center;">
@@ -188,7 +184,6 @@
                             </td>
 
                             <!-- TRANSFER DATE -->
-                            <!-- <td><?= $row['status']; ?></td> -->
                             <td style="text-align: center;">
                                 <?php if (!empty($row['bukti_transfer'])): ?>
                                     <a href="<?= base_url($row['bukti_transfer']); ?>" target="_blank" class="btn btn-primary">View</a>
@@ -450,6 +445,43 @@
             console.log('File selected: ' + fileName);
         } else {
             console.log('No file selected');
+        }
+    });
+</script>
+
+<script>
+    // Add Item functionality
+    document.getElementById('addItemBtn').addEventListener('click', function() {
+        var tableBody = document.querySelector('#danaRequestTable tbody');
+        var newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td>
+                <input type="number" class="form-control" name="request_dana[]" required>
+            </td>
+            <td>
+                <select class="form-control" name="rekening_tujuan[]" required>
+                    <option value="">Pilih Rekening</option>
+                    <?php foreach($rekenings as $rekening): ?>
+                        <option value="<?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?>" <?= set_select('nama_rekening', $rekening['nama_rekening']); ?>><?= $rekening['nama_rekening'] ?> - <?= $rekening['nama_bank'] ?> - <?= $rekening['nomor_rekening'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+            <td>
+                <textarea class="form-control" name="kategori_detail[]" rows="4" required></textarea>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger deleteItemBtn">Delete</button>
+            </td>
+        `;
+
+        tableBody.appendChild(newRow);
+    });
+
+    // Delete Item functionality
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('deleteItemBtn')) {
+            e.target.closest('tr').remove();
         }
     });
 </script>

@@ -73,4 +73,90 @@ class M_administration extends CI_Model {
     }
     
 // ======================================= ADD ONS =======================================  
+
+// ======================================= STOCK ASSET =======================================  
+    public function getAllStockAsset() {
+        $query = $this->db->query('SELECT 
+        id_asset,
+        serialnumber_asset,
+        model_asset,
+        merk_asset,
+        id_cat,
+        qty,
+        asal_barang,
+        tujuan_lokasi,
+        tgl_masuk_asset,
+        tgl_keluar_asset,
+        status_asset,
+        keperluan_asset,
+        nama_penyerahan,
+        nama_penerima,
+        bukti_tandaterima,
+        created_at
+        FROM stock_asset');
+        return $query->result_array();
+    }
+
+    public function addStockAsset($data) {
+        return $this->db->insert('stock_asset', $data);
+    }
+
+// ======================================= STOCK ASSET =======================================  
+    public function getAllDataModem() {
+        $query = $this->db->query('SELECT 
+        kode_modem,
+        lokasi,
+        terdaftar,
+        user_email,
+        password,
+        status
+        FROM modem_transaction');
+        return $query->result_array();
+    }
+
+    public function getAllDataLogModem() {
+        $query = $this->db->query('SELECT
+        id_log,
+        kode_modem,
+        lokasi,
+        tanggal_pinjam,
+        tanggal_kembali,
+        bukti_pinjam,
+        bukti_kembali,
+        user_update_kembali
+        FROM log_modem_transaction');
+        return $query->result_array();
+    }
+
+    public function insertMasterData($data)
+    {
+        return $this->db->insert('modem_transaction', $data);
+    }
+
+    public function getModemBySN($sn) {
+        $this->db->where('kode_modem', $sn);
+        $query = $this->db->get('modem_transaction');
+        return $query->row_array();
+    }
+
+    public function getLogModemByID($id) {
+        $this->db->where('id_log', $id);
+        $query = $this->db->get('log_modem_transaction');
+        return $query->row_array();
+    }
+
+    public function UpdateModemLog($id, $data){
+        $this->db->where('id_log', $id);
+        return $this->db->update('log_modem_transaction', $data);
+    }
+
+    public function insertLogModemTransaction($data){
+        return $this->db->insert('log_modem_transaction', $data);
+    }
+    
+    public function updateModemStatus($kode_modem, $status)
+    {
+        $this->db->where('kode_modem', $kode_modem);
+        return $this->db->update('modem_transaction', ['status' => $status]);
+    }
 }
