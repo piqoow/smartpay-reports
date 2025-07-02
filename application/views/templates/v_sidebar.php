@@ -274,6 +274,13 @@
                     <span>Request Pettycash</span>
                 </a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('modem'); ?>">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Log Modem</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 <?php endif; ?>
