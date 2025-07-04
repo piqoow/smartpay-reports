@@ -106,6 +106,7 @@ $route['modem/insertLog'] = 'Administration/insertLog';
 $route['detail-modem'] = 'Administration/DetailModemTransaction';
 $route['detail-modem/(:num)/(:any)'] = 'Administration/DetailModemTransaction/$1/$2';
 $route['detail-modem/updatelog/(:num)/(:any)'] = 'Administration/UpdateModemLog/$1/$2';
+$route['detail-modem/updatekirimlog/(:num)/(:any)'] = 'Administration/UpdateModemLog/$1/$2';
 
 //auth
 $route['login'] = 'auth/index';

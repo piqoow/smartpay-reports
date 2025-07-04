@@ -308,47 +308,104 @@ class Administration extends CI_Controller {
             redirect('modem');
     }
 
-    public function UpdateModemLog($id, $sn)
+    public function UpdateModemLog($id, $kode_modem)
     {
         $this->load->model('M_administration');
         $this->load->library('upload');
 
+        $route_segment = $this->uri->segment(2);
+
         $nama = $this->input->post('nama');
         $tanggal_kembali = $this->input->post('tanggal_kembali');
-        $data = [
-            'user_update_kembali' => $nama,
-            'tanggal_kembali' => $tanggal_kembali
-        ];
+        $tanggal_pinjam = $this->input->post('tanggal_pinjam');
+        $nama_lokasi = $this->input->post('nama_lokasi');
 
-        // Handle file upload jika ada
+        $file_name = null;
+
+        // ===== Upload file jika ada =====
         if (!empty($_FILES['bukti_kembali']['name'])) {
-            $config['upload_path'] = './bukti-kembali-modem/';
+            // Upload langsung ke bukti-pinjam-modem
+            $config['upload_path'] = './bukti-pinjam-modem/';
             $config['allowed_types'] = '*';
             $config['max_size'] = 20480;
             $config['file_name'] = $_FILES['bukti_kembali']['name'];
 
             $this->upload->initialize($config);
 
-            if ($this->upload->do_upload('bukti_kembali')) {
-                $upload_data = $this->upload->data();
-                $data['bukti_kembali'] = $upload_data['file_name'];
-            } else {
+            if (!$this->upload->do_upload('bukti_kembali')) {
                 $this->session->set_flashdata('error', 'Upload gagal: ' . $this->upload->display_errors());
-                redirect('detail-modem/' . $id . '/' . $sn);
+                redirect('detail-modem/' . $id . '/' . $kode_modem);
                 return;
+            }
+
+            $upload_data = $this->upload->data();
+            $file_name = $upload_data['file_name'];
+        }
+
+        // === CASE: Update ke HO Biak ===
+        if ($route_segment === 'updatelog') {
+            $data_update = [
+                'user_update_kembali' => $nama,
+                'tanggal_kembali' => $tanggal_kembali
+            ];
+
+            if ($file_name) {
+                // Copy ke folder bukti-kembali-modem juga
+                @copy('./bukti-pinjam-modem/' . $file_name, './bukti-kembali-modem/' . $file_name);
+                $data_update['bukti_kembali'] = $file_name;
+            }
+
+            if ($this->M_administration->UpdateModemLog($id, $data_update)) {
+                $this->session->set_flashdata('success', 'Log berhasil diupdate (HO Biak)');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal update log');
+            }
+
+        }
+
+        // === CASE: Kirim ke lokasi baru ===
+        elseif ($route_segment === 'updatekirimlog') {
+            if (!$file_name) {
+                $this->session->set_flashdata('error', 'Bukti kirim wajib diupload');
+                redirect('detail-modem/' . $id . '/' . $kode_modem);
+                return;
+            }
+
+            // Copy file ke bukti-kembali-modem juga
+            @copy('./bukti-pinjam-modem/' . $file_name, './bukti-kembali-modem/' . $file_name);
+
+            // Insert log baru
+            $data_insert = [
+                'tanggal_pinjam' => $tanggal_pinjam,
+                'nama_pengirim' => $nama,
+                'lokasi' => $nama_lokasi,
+                'kode_modem' => $kode_modem,
+                'bukti_pinjam' => $file_name
+            ];
+
+            $insert = $this->M_administration->insertLogModemTransaction($data_insert);
+
+            if ($insert) {
+                // Update log lama
+                $data_update = [
+                    'user_update_kembali' => $nama,
+                    'tanggal_kembali' => $tanggal_pinjam,
+                    'bukti_kembali' => $file_name
+                ];
+                $this->M_administration->UpdateModemLog($id, $data_update);
+                $this->M_administration->updateModemStatus($kode_modem, 'dipinjam');
+
+                $this->session->set_flashdata('success', 'Log kirim berhasil ditambahkan & status diperbarui');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal insert log baru');
             }
         }
 
-        // Simpan ke database
-        if ($this->M_administration->UpdateModemLog($id, $data)) {
-            $this->session->set_flashdata('success', 'Data berhasil diupdate');
-        } else {
-            $this->session->set_flashdata('error', 'Gagal update data');
-        }
-
-        // Redirect kembali ke halaman detail
-        redirect('detail-modem/' . $id . '/' . $sn);
+        redirect('detail-modem/' . $id . '/' . $kode_modem);
     }
+
+
+
 
     public function DetailModemTransaction($id, $sn) {        
         $data['title'] = 'Detail Log Modem';

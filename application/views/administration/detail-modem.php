@@ -129,8 +129,20 @@
 <div class="container">
     <h2><u>Update Log Modem</u></h2>
 
+    <div class="form-group">
+        <label for="pilihanInput" class="form-label mb-1">Pilih Pengiriman:</label>
+            <select id="pilihanInput" name="pilihanInput" class="form-control form-control-sm" style="width: 200px;">
+                <option value="">Pilih</option>
+                <option value="headoffice">Kirim ke HO Biak</option>
+                <option value="lokasi">Kirim ke Lokasi Baru</option>
+            </select>
+    </div>
+
+<!-- KIRIM KE HO -->
+<div id="formHO" class="p-2" style="display: none;">
     <?= form_open_multipart('detail-modem/updatelog/' . $logmodem['id_log'] . '/' . $datamodem['kode_modem']); ?>
 
+<br>
     <div class="form-group">
         <label for="nama">Nama </label>
         <input type="text" name="nama" class="form-control">
@@ -151,6 +163,39 @@
 <br>
     <button type="submit" class="btn btn-primary">Update</button>
     <?= form_close(); ?>
+</div>
+
+<!-- KIRIM KE Lokasi Baru -->
+<div id="formLokasi" class="p-2" style="display: none;">
+    <?= form_open_multipart('detail-modem/updatekirimlog/' . $logmodem['id_log'] . '/' . $datamodem['kode_modem']); ?>
+
+<br>
+    <div class="form-group">
+        <label for="nama">Nama Pengirim</label>
+        <input type="text" name="nama" class="form-control">
+    </div>
+<br>
+    <div class="form-group">
+        <label for="nama_lokasi">Nama Lokasi Baru</label>
+        <input type="text" name="nama_lokasi" class="form-control">
+    </div>
+<br>
+    <div class="form-group">
+        <label for="tanggal_pinjam">Tanggal Kirim</label>
+        <input type="date" name="tanggal_pinjam" class="form-control" value="<?= set_value('tanggal_kembali', date('Y-m-d')); ?>">
+    </div>
+<br>
+    <div class="form-group">
+        <label for="bukti_kembali">Bukti Kirim (Upload File)</label>
+        <input type="file" name="bukti_kembali" class="form-control-file">
+        <?php if (!empty($logmodem['bukti_kembali'])): ?>
+            <p>File saat ini: <a href="<?= base_url('bukti-kembali-modem/' . $logmodem['bukti_kembali']); ?>" target="_blank">Lihat</a></p>
+        <?php endif; ?>
+    </div>
+<br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <?= form_close(); ?>
+</div>
 </div>
 <?php endif; ?>
 
@@ -185,10 +230,28 @@
             <?php endif; ?>
         });
 </script>
+<script>
+    document.getElementById('pilihanInput').addEventListener('change', function () {
+        const selected = this.value;
+        const headoffice = document.getElementById('formHO');
+        const lokasi = document.getElementById('formLokasi');
+
+        if (selected === 'headoffice') {
+            headoffice.style.display = 'block';
+            lokasi.style.display = 'none';
+        } else if (selected === 'lokasi') {
+            headoffice.style.display = 'none';
+            lokasi.style.display = 'block';
+        } else {
+            headoffice.style.display = 'none';
+            lokasi.style.display = 'none';
+        }
+    });
+</script>
 
 <br>
 <footer>
-    <p>&copy; <?= date('Y'); ?></p>
+    <p>&copy; <?= date('Y'); ?> Smartpay</p>
 </footer>
 
 </body>
